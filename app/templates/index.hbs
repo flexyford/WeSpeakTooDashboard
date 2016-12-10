@@ -1,1 +1,9 @@
-{{outlet}}
+{{meetup-group-form on-success=(action "onSuccess")}}
+
+{{#if groups}}
+  {{#each groups as |group|}}
+    <div class="flexrow">
+      {{group.name}}
+    </div>
+  {{/each}}
+{{/if}}

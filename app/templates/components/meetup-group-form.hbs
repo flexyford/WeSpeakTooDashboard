@@ -1,0 +1,39 @@
+{{#x-form
+   class="test-meetup-request-form"
+   data=params
+   onSubmit=(action "getMeetupEndpoint")
+   onSuccess=(action "success")
+   onError=(action "error")
+   as |form|
+}}
+  {{#form.field property="category" as |field|}}
+    <div class="flexrow">
+      Category:
+      {{one-way-input
+        value=field.value
+        update=(action field.actions.onChange)
+        name="category"
+        required=true
+      }}
+    </div>
+  {{/form.field}}
+
+  {{#form.field property="page" as |field|}}
+    <div class="flexrow">
+      Number of Meetup Groups:
+      {{one-way-input field.value
+        update=(action field.actions.onChange)
+        name="num-groups"
+        required=true
+      }}
+    </div>
+  {{/form.field}}
+
+  <div>
+    <div class="col-xs-4 end-xs">
+      <button {{action form.actions.submit}}>
+        Find Groups
+      </button>
+    </div>
+  </div>
+{{/x-form}}
