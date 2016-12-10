@@ -37,6 +37,7 @@
     "ember-data": "^2.5.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
+    "ember-multiselect-checkboxes": "0.10.1",
     "ember-one-way-controls": "1.1.2",
     "ember-resolver": "^2.0.3",
     "emberx-form": "0.0.1",

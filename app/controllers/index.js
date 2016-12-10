@@ -4,8 +4,12 @@ const { get, set } = Ember;
 export default Ember.Controller.extend({
   groups: null,
   actions: {
-    onSuccess(groups) {
+    onGroups(groups) {
       set(this, 'groups', groups);
+    },
+
+    onEvents(events) {
+      set(this, 'events', events);
     }
   }
 });

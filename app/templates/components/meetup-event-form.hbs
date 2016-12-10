@@ -1,0 +1,28 @@
+{{#x-form
+   class="test-meetup-request-form"
+   data=collection
+   onSubmit=(action "getMeetupEndpoint")
+   onSuccess=(action "success")
+   onError=(action "error")
+   as |form|
+}}
+  {{#form.field property="selectedGroups" as |field|}}
+    <div class="flexrow">
+      {{multiselect-checkboxes
+        options=groups
+        labelProperty='name'
+        onchange=(action field.actions.onChange)
+        selection=field.value
+      }}
+    </div>
+  {{/form.field}}
+
+  <div>
+    <div class="col-xs-4 end-xs">
+      <button {{action form.actions.submit}}>
+        Find Events
+      </button>
+    </div>
+  </div>
+
+{{/x-form}}

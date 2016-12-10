@@ -64,7 +64,6 @@ export default Ember.Component.extend({
           urlname: d.urlname
         };
       });
-      debugger;
       get(this, 'on-success')(data);
     },
 
