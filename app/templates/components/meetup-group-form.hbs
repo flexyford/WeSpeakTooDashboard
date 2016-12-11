@@ -1,9 +1,7 @@
 {{#x-form
    class="test-meetup-request-form"
    data=params
-   onSubmit=(action "getMeetupEndpoint")
-   onSuccess=(action "success")
-   onError=(action "error")
+   onSubmit=(action "submit")
    as |form|
 }}
   {{#form.field property="category" as |field|}}

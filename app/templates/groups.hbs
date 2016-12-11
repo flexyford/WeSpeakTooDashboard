@@ -1,0 +1,11 @@
+{{#each selectedGroups as |group|}}
+  <ul>
+    {{#link-to 'groups.group' group}}
+      <li>{{group.name}}</li>
+    {{/link-to}}
+  </ul>
+{{else}}
+  {{meetup-event-form groups=groups on-submit=(action "submit")}}
+{{/each}}
+
+{{outlet}}

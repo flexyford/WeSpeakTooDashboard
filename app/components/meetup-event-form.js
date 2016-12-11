@@ -14,30 +14,8 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    getMeetupEndpoint(changeset) {
-      return Ember.RSVP.Promise.all(
-        changeset.selectedGroups.map((group) => {
-          return $.ajax({
-            url: `https://api.meetup.com/2/events`,
-            data: Object.assign({
-              key: ENV.MEETUP_KEY,
-              sign: true,
-              page: 10,
-              group_urlname: group.urlname
-            }),
-            dataType: 'jsonp'
-          });
-        })
-      );
-    },
-
-    success(response) {
-      debugger;
-      return;
-    },
-
-    error(error) {
-      return;
+    submit(changeset) {
+      get(this, 'on-submit')(changeset.selectedGroups);
     }
   }
 });
