@@ -1,7 +1,8 @@
-# Austin-speaks-too
+# WeSpeakToo Dashboard
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+[DashBoard Demo](https://flexyford.github.io/WeSpeakTooDashboard/#/groups)
+
+> Note: This is totally unstyled. More styling to come in the future.
 
 ## Prerequisites
 
@@ -15,8 +16,8 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* change into the new directory
+* `git clone git@github.com:flexyford/WeSpeakTooDashboard.git`
+* `cd WeSpeakTooDashboard`
 * `npm install`
 * `bower install`
 
