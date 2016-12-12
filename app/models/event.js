@@ -6,5 +6,7 @@ export default DS.Model.extend({
   rsvp: DS.attr('string'),
   maleSpeakers: DS.attr('number'),
   femaleSpeakers: DS.attr('number'),
-  nonBinarySpeakers: DS.attr('number')
+  nonBinarySpeakers: DS.attr('number'),
+
+  group: DS.belongsTo('group')
 });

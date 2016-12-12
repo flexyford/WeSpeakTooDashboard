@@ -23,11 +23,16 @@ export default ApplicationAdapter.extend({
           sign: true
         }, params),
         dataType: 'jsonp'
-      }).then(function(response) {
+      }).then((response) => {
         let status = response.status;
         if (status && status.match(/^4\d+/)) {
           reject(response);
         }
+        response.results = response.results.map((event) => {
+          return Object.assign({}, event, {
+            group: query.group_id
+          });
+        });
         resolve({ "events": response.results});
       }, function(jqXHR) {
         reject(jqXHR);
