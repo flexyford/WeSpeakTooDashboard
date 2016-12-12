@@ -1,6 +1,6 @@
 # WeSpeakToo Dashboard
 
-[DashBoard Demo](https://flexyford.github.io/WeSpeakTooDashboard/#/groups)
+[DashBoard Demo](https://flexyford.github.io/WeSpeakTooDashboard)
 
 > Note: This is totally unstyled. More styling to come in the future.
 
