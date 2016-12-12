@@ -11,7 +11,6 @@ export default Ember.Controller.extend({
       event.set(speakerKey, count - 1);
     },
     increment(event, speaker) {
-      debugger;
       let speakerKey = `${speaker}Speakers`;
       let count = event.get(speakerKey);
       event.set(speakerKey, count + 1);

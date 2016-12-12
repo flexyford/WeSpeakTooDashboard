@@ -29,7 +29,6 @@ export default ApplicationAdapter.extend({
 
   query(store, type, query) {
     const url = `${this.host}/find/groups`;
-    debugger;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       $.ajax({
       url,

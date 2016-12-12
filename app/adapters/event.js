@@ -5,7 +5,6 @@ import ApplicationAdapter from './application';
 export default ApplicationAdapter.extend({
   host: 'https://api.meetup.com',
   query(store, type, query) {
-    debugger;
     let params = {
       page: 20,
       limited_events: false,
@@ -25,7 +24,6 @@ export default ApplicationAdapter.extend({
         }, params),
         dataType: 'jsonp'
       }).then(function(response) {
-        debugger;
         let status = response.status;
         if (status && status.match(/^4\d+/)) {
           reject(response);
