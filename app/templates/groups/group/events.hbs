@@ -6,6 +6,21 @@
       <h3 style="color:red;">{{event.name}}</h3>
       {{{event.description}}}
     </li>
+    <div class="gender-count male">
+      <button {{action "decrement" event "male"}}>-</button>
+      Male Speakers: {{event.maleSpeakers}}
+      <button {{action "increment" event "male"}}>+</button>
+    </div>
+    <div class="gender-count female">
+      <button {{action "decrement" event "female"}}>-</button>
+      Female Speakers: {{event.femaleSpeakers}}
+      <button {{action "increment" event "female"}}>+</button>
+    </div>
+    <div class="gender-count non-binary">
+      <button {{action "decrement" event "nonBinary"}}>-</button>
+      Non-Binary Speakers: {{event.nonBinarySpeakers}}
+      <button {{action "increment" event "nonBinary"}}>+</button>
+    </div>
   {{/each}}
 </ul>
 

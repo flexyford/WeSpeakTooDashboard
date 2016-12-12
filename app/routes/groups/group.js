@@ -1,7 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  afterModel(group) {
+  model(params) {
+    return this.store.findRecord('group', params.group_id);
+  },
+  afterModel() {
     this.transitionTo('groups.group.events');
   }
 });

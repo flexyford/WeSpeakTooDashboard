@@ -3,6 +3,7 @@ import Ember from 'ember';
 import ApplicationAdapter from './application';
 
 export default ApplicationAdapter.extend({
+  host: 'https://api.meetup.com',
   query(store, type, query) {
     debugger;
     let params = {
