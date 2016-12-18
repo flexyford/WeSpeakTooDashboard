@@ -23,7 +23,6 @@ export default Ember.Component.extend({
 
   actions: {
     submit(changeset) {
-      debugger;
       let params = Object.assign({}, get(this, 'defaults'), changeset);
       get(this, 'on-submit')(params);
     }

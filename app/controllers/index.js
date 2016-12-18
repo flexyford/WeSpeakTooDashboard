@@ -7,7 +7,6 @@ export default Ember.Controller.extend({
   actions: {
     import(files) {
       let csv = files[0];
-      debugger;
       let data = PapaParse.parse(csv, {
         complete: (results) => {
           let { data } = results;
@@ -35,7 +34,8 @@ export default Ember.Controller.extend({
             let id = result[indeces.group];
             if (!groups.find((g) => g.id === id)) {
               return groups.concat({
-                id
+                id,
+                event_ids: events.filterBy('group_id', id).mapBy('id')
               });
             }
             return groups;
@@ -46,14 +46,9 @@ export default Ember.Controller.extend({
             events
           };
 
-          debugger;
-
           get(this, 'store').pushPayload(payload);
 
-          // this.transitionToRoute('groups.group.events', {
-          //   selected: groups.mapBy('id'),
-          //   events:
-          // });
+          this.transitionToRoute('groups.group.events', payload.groups[0].id);
         }
       });
     },
