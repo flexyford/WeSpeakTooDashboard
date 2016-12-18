@@ -1,29 +1,29 @@
 {{#x-form
    class="test-meetup-request-form"
-   data=params
+   data=defaults
    onSubmit=(action "submit")
    as |form|
 }}
   {{#form.field property="category" as |field|}}
-    <div class="flexrow">
-      Category:
-      {{one-way-input
-        value=field.value
-        update=(action field.actions.onChange)
-        name="category"
-        required=true
-      }}
-    </div>
+    {{#x-select
+       value=field.value
+       action=(action field.actions.onChange)
+       as |xs|}}
+      {{#each categories as |category|}}
+        {{#xs.option value=category.value}}{{category.name}}{{/xs.option}}
+      {{/each}}
+    {{/x-select}}
   {{/form.field}}
 
   {{#form.field property="page" as |field|}}
     <div class="flexrow">
-      Number of Meetup Groups:
-      {{one-way-input field.value
-        update=(action field.actions.onChange)
-        name="num-groups"
-        required=true
+      Max number of results:
+      {{x-range-input
+        min=10 max=200 step=5
+        value=field.value
+        action=(action field.actions.onChange)
       }}
+      {{field.value}}
     </div>
   {{/form.field}}
 
