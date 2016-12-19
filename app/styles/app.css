@@ -1,0 +1,4 @@
+.btn-link:hover > label,
+.btn-link:focus > label {
+  text-decoration: underline;
+}
