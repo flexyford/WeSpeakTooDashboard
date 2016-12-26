@@ -1,1 +1,13 @@
+<div class="meetup-nav-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        {{#each selectedGroups as |group|}}
+          {{group.name}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+
 {{outlet}}

@@ -1,21 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['selected'],
+  parent: Ember.inject.controller('groups'),
 
-  selected: null,
-
-  selectedGroups: Ember.computed('groups', 'selected', function() {
-    debugger;
-    let selected = this.get('selected');
-    let selectedIds = selected ? selected.split(',') : [];
-    let groups = this.get('groups');
-    let selectedGroups = selectedIds.map((id) => {
-      return groups.findBy('id', id);
-    });
-
-    return selectedGroups;
-  }),
+  selected: Ember.computed.alias('parent.selected'),
+  selectedGroups: Ember.computed.alias('parent.selectedGroups'),
 
   containsSelections: Ember.computed.bool('selectedGroups.length'),
 
@@ -33,7 +22,6 @@ export default Ember.Controller.extend({
       this.set('selected', selected);
     },
     removeGroup(group) {
-      debugger;
       let selected = this.get('selected');
       let selectedIds = selected ? selected.split(',') : [];
       let index = selectedIds.indexOf(group.id);
