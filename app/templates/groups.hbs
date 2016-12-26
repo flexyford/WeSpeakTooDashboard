@@ -1,9 +1,27 @@
-<div class="meetup-nav-container">
+<div class="media-filter-container">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3">
-        {{#each selectedGroups as |group|}}
-          {{group.name}}
+      <div class="col-lg-12">
+        {{#each selectedGroups as |meetup|}}
+          {{#link-to 'groups.group' meetup
+             tagName="li"
+             class="content-piece"
+          }}
+            <div class="content-piece-image-container">
+              <img src={{meetup.imageUrl}} class="content-piece-image">
+            </div>
+            <div class="content-piece-body">
+              <h3 class="test-resource-card__full content-piece-title">{{{meetup.name}}}</h3>
+              <div class="content-piece-info">
+                <span class="content-piece-category">{{meetup.category}}</span>
+                <span class="content-piece-members">{{meetup.members}} Members</span>
+              </div>
+            </div>
+          {{/link-to}}
+        {{else}}
+          <div class="media-filter-empty-state">
+            <h3>No Meetups</h3>
+          </div>
         {{/each}}
       </div>
     </div>

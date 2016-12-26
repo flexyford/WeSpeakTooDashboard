@@ -6,6 +6,12 @@
   border-radius: 10px;
   transition: $default-transition;
 
+  &.active {
+    border-bottom: solid;
+    border-bottom-width: 0.25em;
+    border-bottom-color: rgb(247, 77, 123);
+  }
+
   &.selected {
     border: solid;
     border-width: 0.25em;
