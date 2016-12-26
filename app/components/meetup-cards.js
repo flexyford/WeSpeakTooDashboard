@@ -4,9 +4,12 @@ export default Ember.Component.extend({
   groups: [],
   selectedGroups: [],
 
+  'on-add-group': Ember.K,
+  'on-remove-group': Ember.K,
+
   meetups: Ember.computed('groups', 'selectedGroups', function() {
     let groups = this.get('groups');
-    this.get('groups').forEach((g) => {
+    groups.forEach((g) => {
       g.set('selected', this.get('selectedGroups').includes(g));
     });
     return groups;
@@ -15,11 +18,10 @@ export default Ember.Component.extend({
   actions: {
     toggle(meetup) {
       meetup.toggleProperty('selected');
-      const isSelected = meetup.selected;
-      if (isSelected) {
-        this.get('selectedGroups').pushObject(meetup);
+      if (meetup.selected) {
+        this.get('on-add-group')(meetup);
       } else {
-        this.get('selectedGroups').removeObject(meetup);
+        this.get('on-remove-group')(meetup);
       }
     }
   }

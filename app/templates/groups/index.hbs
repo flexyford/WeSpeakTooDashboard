@@ -2,7 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        {{meetup-cards groups=groups selectedGroups=selectedGroups}}
+        {{meetup-cards
+          groups=groups
+          selectedGroups=selectedGroups
+          on-add-group=(action "selectGroup")
+          on-remove-group=(action "removeGroup")
+        }}
       </div>
     </div>
   </div>
@@ -19,3 +24,5 @@
     {{/link-to}}
   </div>
 </div>
+
+{{export-csv groups=groups}}
