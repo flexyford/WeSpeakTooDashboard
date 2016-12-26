@@ -7,7 +7,7 @@ export default DS.RESTSerializer.extend({
       hash.imageUrl = hash.group_photo.photo_link;
     }
 
-    hash.category = hash.category.name;
+    hash.category = hash.category && hash.category.name;
     hash.description = Ember.String.htmlSafe(hash.description);
     return this._super(...arguments);
   }

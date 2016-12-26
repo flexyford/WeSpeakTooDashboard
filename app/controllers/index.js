@@ -41,14 +41,13 @@ export default Ember.Controller.extend({
             return groups;
           }, []);
 
-          let payload = {
-            groups,
-            events
-          };
-
+          let payload = { groups, events };
           get(this, 'store').pushPayload(payload);
 
-          this.transitionToRoute('groups.group.events', payload.groups[0].id);
+          let selected = groups.mapBy('id').join(',');
+          this.transitionToRoute('groups.group.events', payload.groups[0].id, {
+            queryParams: { selected }
+          });
         }
       });
     },
