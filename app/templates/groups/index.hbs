@@ -1,0 +1,21 @@
+<div class="media-filter-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        {{meetup-cards groups=groups selectedGroups=selectedGroups}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="col-xs-4 end-xs">
+    {{#link-to 'groups.group' firstGroup
+       tagName="button"
+       class="btn btn-primary"
+       disabled=disabled
+    }}
+      Search {{selectedGroups.length}} Meetups
+    {{/link-to}}
+  </div>
+</div>

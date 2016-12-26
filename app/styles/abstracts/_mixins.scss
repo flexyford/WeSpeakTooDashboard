@@ -1,0 +1,10 @@
+@mixin breakpoint($device-width) {
+  @media screen and (min-width: $device-width) {
+    @content;
+  }
+}
+
+// Creates a consistant transition animation with some flexability.
+@mixin hover-transition($property, $speed: 200ms) {
+  transition: $property $speed cubic-bezier(0.47, 0, 0.75, 0.72);
+}
