@@ -27,6 +27,29 @@ export default ApplicationAdapter.extend({
     });
   },
 
+  findAll: function(store, type, sinceToken, snapshotRecordArray) {
+    let group_id = snapshotRecordArray.adapterOptions.group_id;
+    const url = `${this.host}/2/groups`;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      $.ajax({
+        url,
+        data: Object.assign({
+          key: ENV.MEETUP_KEY,
+          sign: true
+        }, { group_id }),
+        dataType: 'jsonp'
+      }).then(function(response) {
+        let status = response.status;
+        if (status && status.match(/^4\d+/)) {
+          reject(response);
+        }
+        resolve({ groups: response.results });
+      }, function(jqXHR) {
+        reject(jqXHR);
+      });
+    });
+  },
+
   query(store, type, query) {
     const url = `${this.host}/find/groups`;
     return new Ember.RSVP.Promise(function(resolve, reject) {

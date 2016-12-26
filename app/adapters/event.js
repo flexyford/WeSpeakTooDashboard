@@ -8,7 +8,7 @@ export default ApplicationAdapter.extend({
     let params = {
       page: 20,
       limited_events: false,
-      group_urlname: query.urlname,
+      group_id: query.group_id,
       time: '1451610000000,',
       order: 'time',
       status: 'past',
