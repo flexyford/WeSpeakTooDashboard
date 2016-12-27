@@ -30,10 +30,12 @@ export default Ember.Component.extend({
   categories: CATEGORIES,
   zip: '78705', // Default to Austin, Tx
 
-  defaults: Ember.computed('categories', function() {
+  defaults: Ember.computed('categories', 'zip', function() {
     return {
       category: get(this, 'categories').findBy('name', 'Tech').value,
-      zip: get(this, 'zip')
+      zip: get(this, 'zip'),
+      lat: null,
+      lon: null
     };
   }),
 
@@ -43,12 +45,12 @@ export default Ember.Component.extend({
 
   actions: {
     setCurrentLocation() {
+      this.set('zip', null);
       this.set('useCurrentLocation', true);
     },
     submit(changeset) {
       let params = Object.assign({}, get(this, 'defaults'), changeset);
       if (this.get('useCurrentLocation')) {
-        delete params.zip;
         params.lat = this.get('latlng')[LATITUDE];
         params.lon = this.get('latlng')[LONGITUDE];
       }

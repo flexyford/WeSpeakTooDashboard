@@ -39,7 +39,8 @@ export default Ember.Route.extend({
   groupQueryParams(params) {
     let required = {
       category: params.category,
-      page: params.page
+      page: params.page,
+      radius: params.radius
     };
 
     let optional = {};
