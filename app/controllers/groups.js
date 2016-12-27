@@ -2,10 +2,17 @@ import Ember from 'ember';
 const { get, set } = Ember;
 
 export default Ember.Controller.extend({
-  queryParams: ['category', 'page', 'order', 'selected'],
+  queryParams: [
+    'category', 'page', 'order', 'selected', 'radius', 'zip', 'lat', 'lon'
+  ],
   category: 34,
   order: 'members',
   page: 20,
+  radius: 'smart',
+  zip: null,
+  lat: null,
+  lon: null,
+
   selected: null,
 
   selectedGroups: Ember.computed('model', 'selected', function() {

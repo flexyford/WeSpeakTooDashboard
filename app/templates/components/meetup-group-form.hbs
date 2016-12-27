@@ -15,21 +15,31 @@
     {{/x-select}}
   {{/form.field}}
 
-  {{#form.field property="page" as |field|}}
-    <div class="flexrow">
-      Max number of results:
-      {{x-range-input
-        min=10 max=200 step=5
-        value=field.value
-        action=(action field.actions.onChange)
-      }}
-      {{field.value}}
-    </div>
-  {{/form.field}}
+  <div class="flexrow">
+
+    {{#if useCurrentLocation}}
+      ZipCode: Current Location
+    {{else}}
+      {{#form.field property="zip" as |field|}}
+        ZipCode: {{one-way-input
+          value=field.value
+          update=(action field.actions.onChange)
+          name="zipcode"
+        }}
+      {{/form.field}}
+
+      <button class="btn btn-link" {{action "setCurrentLocation"}}>
+        Use Current Location
+      </button>
+    {{/if}}
+
+  </div>
 
   <div>
     <div class="col-xs-4 end-xs">
-      <button class="btn btn-default" {{action form.actions.submit}}>
+      <button
+          class={{concat "btn btn-default" (if waitingForLocation " disabled")}}
+          {{action form.actions.submit}}>
         Find Groups
       </button>
     </div>

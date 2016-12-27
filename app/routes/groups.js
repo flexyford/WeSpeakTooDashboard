@@ -11,8 +11,10 @@ export default Ember.Route.extend({
   },
 
   model(params) {
+    let groupQueryParams = this.groupQueryParams(params);
+
     let requests = [
-      this.get('store').query('group', params),
+      this.get('store').query('group', groupQueryParams),
     ];
 
     let group_ids = this.get('didTransitionFromImport') ?
@@ -32,5 +34,22 @@ export default Ember.Route.extend({
         return groups.concat(model.toArray());
       }, []).uniq();
     });
+  },
+
+  groupQueryParams(params) {
+    let required = {
+      category: params.category,
+      page: params.page
+    };
+
+    let optional = {};
+    if (params.zip) {
+      optional.zip = params.zip;
+    } else if (params.lat && params.lon) {
+      optional.lat = params.lat;
+      optional.lon = params.lon;
+    }
+
+    return Object.assign(required, optional);
   }
 });
