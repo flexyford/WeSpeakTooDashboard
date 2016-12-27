@@ -1,15 +1,12 @@
 <div class="media-filter-container">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-3">
         {{#each selectedGroups as |meetup|}}
           {{#link-to 'groups.group' meetup
              tagName="li"
-             class="content-piece"
+             class="content-piece content-piece-index"
           }}
-            <div class="content-piece-image-container">
-              <img src={{meetup.imageUrl}} class="content-piece-image">
-            </div>
             <div class="content-piece-body">
               <h3 class="test-resource-card__full content-piece-title">{{{meetup.name}}}</h3>
               <div class="content-piece-info">
@@ -24,10 +21,11 @@
           </div>
         {{/each}}
       </div>
+      <div class="col-lg-9">
+        {{outlet}}
+      </div>
     </div>
   </div>
 </div>
-
-{{outlet}}
 
 {{export-csv groups=model}}

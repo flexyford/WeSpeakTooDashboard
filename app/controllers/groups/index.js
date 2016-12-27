@@ -6,14 +6,7 @@ export default Ember.Controller.extend({
   selected: Ember.computed.alias('parent.selected'),
   selectedGroups: Ember.computed.alias('parent.selectedGroups'),
 
-  containsSelections: Ember.computed.bool('selectedGroups.length'),
-
-  firstGroup: Ember.computed('selectedGroups.length', function() {
-    return this.get('selectedGroups.firstObject');
-  }),
-
   groups: Ember.computed.alias('model'),
-  disabled: Ember.computed.not('containsSelections'),
 
   actions: {
     selectGroup(group) {
