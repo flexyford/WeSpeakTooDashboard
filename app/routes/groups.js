@@ -51,6 +51,16 @@ export default Ember.Route.extend({
     }
   },
 
+  resetController(controller, isExiting, transition) {
+    if (isExiting) {
+      controller.set('page', 20);
+      controller.set('lat', null);
+      controller.set('lon', null);
+      controller.set('zip', null);
+      controller.set('selected', null);
+    }
+  },
+
   model(params) {
     let promises = [];
     const didTransitionFromImport = this.get('didTransitionFromImport');
