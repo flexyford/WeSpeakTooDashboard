@@ -3,10 +3,9 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   parent: Ember.inject.controller('groups'),
 
+  groups: Ember.computed.alias('parent.model'),
   selected: Ember.computed.alias('parent.selected'),
   selectedGroups: Ember.computed.alias('parent.selectedGroups'),
-
-  groups: Ember.computed.alias('model'),
 
   actions: {
     selectGroup(group) {

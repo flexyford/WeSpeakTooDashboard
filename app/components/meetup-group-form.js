@@ -9,6 +9,7 @@ const [ LATITUDE, LONGITUDE ] = [ 0, 1 ];
 
 export default Ember.Component.extend({
   geolocation: Ember.inject.service(),
+  currentLocation: Ember.computed.oneWay('geolocation.currentLocation'),
 
   params: null,
 
@@ -17,43 +18,31 @@ export default Ember.Component.extend({
 
   useCurrentLocation: false,
 
-  init() {
-    this._super(...arguments);
-    this.get('geolocation').getLocation().then((geoObject) => {
-      var currentLocation = this.get('geolocation').get('currentLocation');
-      this.set('latlng', currentLocation);
-    });
-  },
-
-  latlng: null,
-
   categories: CATEGORIES,
   zip: '78705', // Default to Austin, Tx
 
-  defaults: Ember.computed('categories', 'zip', function() {
+  defaults: Ember.computed('categories', 'zip', 'currentLocation', 'useCurrentLocation', function() {
+    const useCurrentLocation = get(this, 'useCurrentLocation');
+    let currentLocation = get(this, 'currentLocation') || [ null, null ];
     return {
       category: get(this, 'categories').findBy('name', 'Tech').value,
-      zip: get(this, 'zip'),
-      lat: null,
-      lon: null
+      zip: useCurrentLocation ? null : get(this, 'zip'),
+      lat: useCurrentLocation ? currentLocation[LATITUDE] : null,
+      lon: useCurrentLocation ? currentLocation[LONGITUDE] : null
     };
   }),
 
-  waitingForLocation: Ember.computed('useCurrentLocation', 'latlng', function() {
-    return this.get('useCurrentLocation') && !this.get('latlng');
+  waitingForLocation: Ember.computed('useCurrentLocation', 'currentLocation', function() {
+    return this.get('useCurrentLocation') && !this.get('currentLocation');
   }),
 
   actions: {
     setCurrentLocation() {
-      this.set('zip', null);
       this.set('useCurrentLocation', true);
     },
     submit(changeset) {
       let params = Object.assign({}, get(this, 'defaults'), changeset);
-      if (this.get('useCurrentLocation')) {
-        params.lat = this.get('latlng')[LATITUDE];
-        params.lon = this.get('latlng')[LONGITUDE];
-      }
+      console.log("params = ", params);
       get(this, 'on-submit')(params);
     }
   }
