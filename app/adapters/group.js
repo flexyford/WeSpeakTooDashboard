@@ -5,6 +5,9 @@ import ApplicationAdapter from './application';
 export default ApplicationAdapter.extend({
   host: 'https://api.meetup.com',
 
+  // Store `findAll` method should never bg reload when it finds cached records
+  shouldBackgroundReloadAll(store, snapshotArray) { return false; },
+
   findRecord(store, type, group_id) {
     const url = `${this.host}/2/groups`;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -40,9 +43,7 @@ export default ApplicationAdapter.extend({
         dataType: 'jsonp'
       }).then(function(response) {
         let status = response.status;
-        if (status && status.match(/^4\d+/)) {
-          reject(response);
-        }
+        if (status && status.match(/^4\d+/)) { reject(response); }
         resolve({ groups: response.results });
       }, function(jqXHR) {
         reject(jqXHR);
@@ -62,9 +63,7 @@ export default ApplicationAdapter.extend({
       dataType: 'jsonp'
       }).then(function(response) {
         let status = response.status;
-        if (status && status.match(/^4\d+/)) {
-          reject(response);
-        }
+        if (status && status.match(/^4\d+/)) { reject(response); }
         resolve({ "groups": response.data});
       }, function(jqXHR) {
         reject(jqXHR);

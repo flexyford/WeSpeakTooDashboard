@@ -17,9 +17,6 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    loadMore() {
-      this.get('on-load-more-groups')();
-    },
     toggle(meetup) {
       meetup.toggleProperty('selected');
       if (meetup.selected) {

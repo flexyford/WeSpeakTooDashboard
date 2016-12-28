@@ -7,38 +7,90 @@ export default Ember.Route.extend({
     }
   },
 
-  beforeModel(transition) {
+  beforeModel() {
     let groups = this.get('store').peekAll('group');
     let groupsFromServer = groups.filterBy('urlname');
-    const didTransitionFromImport = groups.length ?
-        groups.length === groupsFromServer.length : false;
+    const didTransitionFromImport = groups.get('length') > 0 &&
+          groupsFromServer.get('length') === 0;
 
     this.set('didTransitionFromImport', didTransitionFromImport);
+
+    if (didTransitionFromImport) {
+      this.set('import_ids', groups.mapBy('id').join(','));
+    }
+  },
+
+  setupController(controller, groups) {
+    // Call _super for default behavior
+    this._super(...arguments);
+
+    // Set Lat/Lon Query Parms if necessary
+    const shouldSetLocation = !(
+      controller.get('zip') || (controller.get('lat') || controller.get('lon'))
+    );
+
+    let groupWithLocation = groups.find((group) => {
+      return group.get('lat') && group.get('lon');
+    });
+
+    if (shouldSetLocation && groupWithLocation) {
+      controller.set('lat', groupWithLocation.get('lat'));
+      controller.set('lon', groupWithLocation.get('lon'));
+    }
   },
 
   model(params) {
+    let promises = [];
+    const didTransitionFromImport = this.get('didTransitionFromImport');
+
     let groupQueryParams = this.groupQueryParams(params);
+    const waitForLocation = !(groupQueryParams.zip || groupQueryParams.lat);
 
-    let requests = [
-      this.get('store').query('group', groupQueryParams),
-    ];
-
-    let group_ids = this.get('didTransitionFromImport') ?
-        this.get('store').peekAll('group').mapBy('id').join(',') :
-        params.selected || undefined;
+    let group_ids =  didTransitionFromImport ?
+        this.get('import_ids') : params.selected;
 
     if (group_ids) {
-      requests.push(
-        this.get('store').findAll('group', {
-          adapterOptions: { group_id: group_ids }
-        })
-      );
+      let findAll = this.get('store').findAll('group', {
+        adapterOptions: { group_id: group_ids },
+        // Force Reload since pushPayload from import
+        // returns incomplete data models
+        reload: didTransitionFromImport
+      });
+      promises.push(findAll);
     }
 
-    return Ember.RSVP.all(requests).then((models) => {
-      return models.reduce((groups, model) => {
+    // If the are no location query parameters, then we have to wait for the
+    // first batch of promises, ie 'import' or 'selected' to return.
+    // Once we have those groups, we can set the lat/lon location in query params
+    // to the lat/lon of the first group.
+    if (!waitForLocation) {
+      let query = this.get('store').query('group', groupQueryParams);
+      promises.push(query);
+    }
+
+    // First Phase of Requests
+    return Ember.RSVP.all(promises).then((models) => {
+      let groups = models.reduce((groups, model) => {
         return groups.concat(model.toArray());
-      }, []).uniq();
+      }, []);
+
+      if (!waitForLocation) { return groups.uniq(); }
+
+      // Second Phase of Requests with Location
+      let groupWithLocation = groups.find((group) => {
+        return group.get('lat') && group.get('lon');
+      });
+
+      if (groupWithLocation) {
+        Object.assign(groupQueryParams, {
+          lat: groupWithLocation.get('lat'),
+          lon: groupWithLocation.get('lon')
+        });
+      }
+
+      return this.get('store').query('group', groupQueryParams).then((models) => {
+        return groups.concat(models.toArray()).uniq();
+      });
     });
   },
 

@@ -1,7 +1,10 @@
 {{meetup-cards
   groups=groups
   selectedGroups=selectedGroups
-  on-load-more-groups=(action "loadMore")
   on-add-group=(action "selectGroup")
   on-remove-group=(action "removeGroup")
 }}
+
+<button class="btn btn-primary" {{action "loadMore"}}>
+  Load More Groups
+</button>
