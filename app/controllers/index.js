@@ -46,12 +46,23 @@ export default Ember.Controller.extend({
 
           let selected = groups.mapBy('id').join(',');
           this.transitionToRoute('groups.group.events', payload.groups[0].id, {
-            queryParams: { selected }
+            queryParams: {
+              selected,
+              // Reset Location
+              lat: null,
+              lon: null,
+              zip: null,
+              page: 20
+            }
           });
         }
       });
     },
     submit(queryParams) {
+      Object.assign(queryParams, {
+        page: 20,
+        selected: null
+      });
       this.transitionToRoute('groups', { queryParams });
     }
   }

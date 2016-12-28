@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { isPresent } = Ember;
+
 export default Ember.Route.extend({
   queryParams: {
     page: {
@@ -9,15 +11,9 @@ export default Ember.Route.extend({
 
   beforeModel() {
     let groups = this.get('store').peekAll('group');
-    let groupsFromServer = groups.filterBy('urlname');
-    const didTransitionFromImport = groups.get('length') > 0 &&
-          groupsFromServer.get('length') === 0;
-
-    this.set('didTransitionFromImport', didTransitionFromImport);
-
-    if (didTransitionFromImport) {
-      this.set('import_ids', groups.mapBy('id').join(','));
-    }
+    let groupsFromImport = groups.rejectBy('urlname');
+    this.set('didTransitionFromImport', !!groupsFromImport.get('length'));
+    this.set('import_ids', groupsFromImport.mapBy('id').join(','));
   },
 
   setupController(controller, groups) {
@@ -29,13 +25,29 @@ export default Ember.Route.extend({
       controller.get('zip') || (controller.get('lat') || controller.get('lon'))
     );
 
-    let groupWithLocation = groups.find((group) => {
-      return group.get('lat') && group.get('lon');
-    });
+    if (shouldSetLocation) {
+      let setLocation = (groups) => {
+        let groupWithLocation = groups.find((group) => {
+          return group.get('lat') && group.get('lon');
+        });
 
-    if (shouldSetLocation && groupWithLocation) {
-      controller.set('lat', groupWithLocation.get('lat'));
-      controller.set('lon', groupWithLocation.get('lon'));
+        if (shouldSetLocation && groupWithLocation) {
+          controller.set('lat', groupWithLocation.get('lat'));
+          controller.set('lon', groupWithLocation.get('lon'));
+        }
+      };
+
+      let importIds = this.get('import_ids').split(',').filter((id) => {
+        return isPresent(id);
+      });
+
+      if (isPresent(importIds)) {
+        this.get('store').findByIds('group', importIds).then((groups) => {
+          setLocation(groups);
+        });
+      } else {
+        setLocation(groups);
+      }
     }
   },
 
