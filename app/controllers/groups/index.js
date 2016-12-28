@@ -19,6 +19,11 @@ export default Ember.Controller.extend({
       let index = selectedIds.indexOf(group.id);
       selectedIds.splice(index, 1);
       this.set('selected', selectedIds.join(','));
+    },
+    loadMore() {
+      let parent = this.get('parent');
+      let results = parent.get('page') + 20;
+      parent.set('page', results);
     }
   }
 });

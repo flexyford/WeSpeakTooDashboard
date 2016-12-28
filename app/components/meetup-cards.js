@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   selectedGroups: [],
 
   'on-add-group': Ember.K,
+  'on-load-more-groups': Ember.K,
   'on-remove-group': Ember.K,
 
   meetups: Ember.computed('groups', 'selectedGroups', function() {
@@ -16,6 +17,9 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    loadMore() {
+      this.get('on-load-more-groups')();
+    },
     toggle(meetup) {
       meetup.toggleProperty('selected');
       if (meetup.selected) {

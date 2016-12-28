@@ -1,6 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  queryParams: {
+    page: {
+      refreshModel: true
+    }
+  },
+
   beforeModel(transition) {
     let groups = this.get('store').peekAll('group');
     let groupsFromServer = groups.filterBy('urlname');
