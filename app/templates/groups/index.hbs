@@ -5,6 +5,8 @@
   on-remove-group=(action "removeGroup")
 }}
 
-<button class="btn btn-primary" {{action "loadMore"}}>
-  Load More Groups
-</button>
+{{#if canLoadMore}}
+  <button class="btn btn-primary" {{action "loadMore"}}>
+    Load More Groups
+  </button>
+{{/if}}

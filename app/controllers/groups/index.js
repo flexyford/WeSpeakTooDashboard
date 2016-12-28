@@ -7,6 +7,10 @@ export default Ember.Controller.extend({
   selected: Ember.computed.alias('parent.selected'),
   selectedGroups: Ember.computed.alias('parent.selectedGroups'),
 
+  canLoadMore: Ember.computed('parent.page', 'groups.length', function() {
+    return this.get('parent.page') <= this.get('groups.length');
+  }),
+
   actions: {
     selectGroup(group) {
       let selected = this.get('selected');
