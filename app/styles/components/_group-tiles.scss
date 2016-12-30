@@ -3,7 +3,7 @@ ul.groups__index {
   padding: 0;
 
   .tile {
-    min-width: 250px;
+    width: 250px;
     padding: 0.4em;
     border-top: solid;
     border-width: thin;
@@ -11,8 +11,6 @@ ul.groups__index {
     background-color: $alabaster;
     cursor: pointer;
     display: block;
-
-
 
     &.active {
       background-color: $polar;
@@ -23,6 +21,8 @@ ul.groups__index {
       &__title {
         color: $shamrock;
         margin-bottom: 0.25em;
+        overflow: hidden;
+        white-space: nowrap;
       }
 
       &__events {
