@@ -26,20 +26,20 @@ export default Ember.Controller.extend({
               male_speakers: result[indeces.male],
               female_speakers: result[indeces.female],
               non_binary_speakers: result[indeces.nonBinary],
-              group_id: result[indeces.group]
+              group: result[indeces.group]
             };
-          });
+          }).filterBy('id');
 
           let groups = data.reduce((groups, result) => {
             let id = result[indeces.group];
             if (!groups.find((g) => g.id === id)) {
               return groups.concat({
                 id,
-                event_ids: events.filterBy('group_id', id).mapBy('id')
+                events: events.filterBy('group_id', id).mapBy('id')
               });
             }
             return groups;
-          }, []);
+          }, []).filterBy('id');
 
           let payload = { groups, events };
           get(this, 'store').pushPayload(payload);
