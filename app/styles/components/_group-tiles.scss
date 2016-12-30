@@ -21,13 +21,6 @@ ul.groups__index {
 
     &-body {
 
-      &:hover {
-        animation-name: example;
-        animation-duration: 0.5s;
-        animation-delay: 0.25s;
-        -webkit-animation-fill-mode: forwards;
-      }
-
       &__title {
         color: $shamrock;
         margin-bottom: 0.25em;

@@ -45,7 +45,7 @@ export default Ember.Controller.extend({
           get(this, 'store').pushPayload(payload);
 
           let selected = groups.mapBy('id').join(',');
-          this.transitionToRoute('groups.group.events', payload.groups[0].id, {
+          this.transitionToRoute('groups', {
             queryParams: { selected }
           });
         }
