@@ -18,13 +18,24 @@
           </div>
         </div>
       {{/link-to}}
-      {{else}}
+      <div class="tile-remove" {{action "removeGroup" meetup}}>X</div>
+    {{else}}
       <div class="no_tiles">
         <h3>Select Meetups</h3>
       </div>
     {{/each}}
   </ul>
+
   {{export-csv groups=selectedGroups disabled=noneSelected}}
+
+  {{#if isGroupsRoute}}
+    {{#link-to 'groups.group' selectedGroups.firstObject
+       tagName="button"
+       class=(concat "btn btn-primary" (unless selectedGroups.firstObject "disabled"))
+    }}
+      Identify Events
+    {{/link-to}}
+  {{/if}}
 </div>
 <div class="col-lg-9">
   {{outlet}}

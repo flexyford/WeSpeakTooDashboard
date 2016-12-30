@@ -13,6 +13,14 @@ export default Ember.Controller.extend({
   lat: null,
   lon: null,
 
+  init(){
+    this._super(...arguments);
+    let applicationController = Ember.getOwner(this).lookup('controller:application');
+    this.set('applicationController', applicationController);
+  },
+
+  currentRouteName: Ember.computed.oneWay('applicationController.currentRouteName'),
+
   selected: null,
 
   selectedGroups: Ember.computed('model', 'selected', function() {
@@ -24,5 +32,17 @@ export default Ember.Controller.extend({
     });
   }),
 
-  noneSelected: Ember.computed.equal('selectedGroups.length', 0)
+  noneSelected: Ember.computed.equal('selectedGroups.length', 0),
+
+  isGroupsRoute: Ember.computed.equal('currentRouteName', 'groups.index'),
+
+  actions: {
+    removeGroup(group) {
+      let selected = this.get('selected');
+      let selectedIds = selected ? selected.split(',') : [];
+      let index = selectedIds.indexOf(group.id);
+      selectedIds.splice(index, 1);
+      this.set('selected', selectedIds.join(','));
+    }
+  }
 });
