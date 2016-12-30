@@ -3,7 +3,6 @@ ul.groups__index {
   padding: 0;
 
   .tile {
-    width: 25%;
     min-width: 250px;
     padding: 0.4em;
     border-top: solid;
@@ -40,7 +39,7 @@ ul.groups__all {
   padding: 0;
 
   .tile {
-    min-width: 250px;
+    width: 250px;
     margin-top: 0.5em;
     margin-right: 0.5em;
     border: none;
@@ -87,12 +86,14 @@ ul.groups__all {
     }
 
     &-body {
-      padding-left: 8px;
+      padding: 0 8px 0 8px;
       margin-bottom: 0.5em;
 
       &__title {
         color: $shamrock;
         margin-bottom: 0.25em;
+        overflow: hidden;
+        white-space: nowrap;
       }
 
       &__events {
