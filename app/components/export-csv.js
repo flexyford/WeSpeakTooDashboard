@@ -3,8 +3,11 @@ import PapaParse from 'papaparse';
 
 export default Ember.Component.extend({
   tagName: 'a',
-  className: ['export'],
-  attributeBindings: ['href', 'download'],
+  classNames: ['btn', 'btn-default', 'export'],
+  classNameBindings: ['disabled'],
+  attributeBindings: ['href', 'download', 'disabled'],
+
+  disabled: false,
 
   href: '#',
   download: 'meetup-data.csv',

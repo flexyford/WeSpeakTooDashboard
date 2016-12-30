@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   ],
   category: 34,
   order: 'members',
-  page: 20,
+  page: 200,
   radius: 'smart',
   zip: null,
   lat: null,
@@ -22,5 +22,7 @@ export default Ember.Controller.extend({
     return selectedIds.map((id) => {
       return groups.findBy('id', id);
     });
-  })
+  }),
+
+  noneSelected: Ember.computed.equal('selectedGroups.length', 0)
 });

@@ -1,31 +1,31 @@
-<div class="media-filter-container">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3">
-        {{#each selectedGroups as |meetup|}}
-          {{#link-to 'groups.group' meetup
-             tagName="li"
-             class="content-piece content-piece-index"
-          }}
-            <div class="content-piece-body">
-              <h3 class="test-resource-card__full content-piece-title">{{{meetup.name}}}</h3>
-              <div class="content-piece-info">
-                <span class="content-piece-category">{{meetup.category}}</span>
-                <span class="content-piece-members">{{meetup.members}} Members</span>
-              </div>
-            </div>
-          {{/link-to}}
-        {{else}}
-          <div class="media-filter-empty-state">
-            <h3>Select Meetups</h3>
+<div class="col-lg-3">
+  <ul class="groups__index">
+    {{#each selectedGroups as |meetup|}}
+      {{#link-to 'groups.group' meetup
+         tagName="li"
+         class="tile"
+      }}
+        <div class="tile-body">
+          <div class="tile-body__title">
+            {{meetup.name}}
           </div>
-        {{/each}}
+          <div class="tile-body__events">
+            {{#if meetup.events.length}}
+              {{meetup.events.length}} Events
+            {{else}}
+              Events Unknown
+            {{/if}}
+          </div>
+        </div>
+      {{/link-to}}
+      {{else}}
+      <div class="no_tiles">
+        <h3>Select Meetups</h3>
       </div>
-      <div class="col-lg-9">
-        {{outlet}}
-      </div>
-    </div>
-  </div>
+    {{/each}}
+  </ul>
+  {{export-csv groups=model disabled=noneSelected}}
 </div>
-
-{{export-csv groups=model}}
+<div class="col-lg-9">
+  {{outlet}}
+</div>

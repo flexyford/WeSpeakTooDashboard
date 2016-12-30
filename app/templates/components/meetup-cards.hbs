@@ -1,22 +1,37 @@
-{{#each meetups as |meetup|}}
-  <div class="content-piece {{if meetup.selected "selected"}}" {{action "toggle" meetup}}>
-    <div class="content-piece-image-container">
-      <img src={{meetup.imageUrl}} class="content-piece-image">
-    </div>
-    <div class="content-piece-body">
-      <h3 class="test-resource-card__full content-piece-title">{{{meetup.name}}}</h3>
-      <div class="content-piece-info">
-        <span class="content-piece-category">{{meetup.category}}</span>
-        <span class="content-piece-members">{{meetup.members}} Members</span>
+<ul class="groups__all">
+  {{#each meetups as |meetup|}}
+    <li class="tile {{if meetup.selected "selected"}}" {{action "toggle" meetup}}>
+      <div class="tile-image-container">
+        <img class="tile-image" src={{meetup.imageUrl}}>
       </div>
+      <div class="tile-body">
+        <div class="tile-body__title">
+          {{meetup.name}}
+        </div>
+        <div class="tile-body__events">
+          {{#if meetup.events.length}}
+            {{meetup.events.length}} Events
+          {{else}}
+            Events Unknown
+          {{/if}}
+        </div>
+      </div>
+      <div class="tile-info">
+        <span class="tile-info__category">
+          {{meetup.category}}
+        </span>
+        <span class="tile-info__members">
+          {{meetup.members}} Members
+        </span>
+      </div>
+    </li>
+  {{else}}
+    <div class="no_tiles">
+      {{#if query}}
+        <h3>No Meetups for "<span class="keyword">{{query}}</span>"</h3>
+      {{else}}
+        <h3>No Meetups</h3>
+      {{/if}}
     </div>
-  </div>
-{{else}}
-  <div class="media-filter-empty-state">
-    {{#if query}}
-      <h3>No Meetups for "<span class="keyword">{{query}}</span>"</h3>
-    {{else}}
-      <h3>No Meetups</h3>
-    {{/if}}
-  </div>
-{{/each}}
+  {{/each}}
+</ul>

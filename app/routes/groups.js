@@ -53,7 +53,7 @@ export default Ember.Route.extend({
 
   resetController(controller, isExiting, transition) {
     if (isExiting) {
-      controller.set('page', 20);
+      controller.set('page', 200);
       controller.set('lat', null);
       controller.set('lon', null);
       controller.set('zip', null);

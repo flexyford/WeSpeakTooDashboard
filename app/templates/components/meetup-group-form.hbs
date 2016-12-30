@@ -4,19 +4,21 @@
    onSubmit=(action "submit")
    as |form|
 }}
-  {{#form.field property="category" as |field|}}
-    {{#x-select
-       value=field.value
-       action=(action field.actions.onChange)
-       as |xs|}}
-      {{#each categories as |category|}}
-        {{#xs.option value=category.value}}{{category.name}}{{/xs.option}}
-      {{/each}}
-    {{/x-select}}
-  {{/form.field}}
+  <div class="flexrow">
+    {{#form.field property="category" as |field|}}
+      Category:
+      {{#x-select
+         value=field.value
+         action=(action field.actions.onChange)
+         as |xs|}}
+        {{#each categories as |category|}}
+          {{#xs.option value=category.value}}{{category.name}}{{/xs.option}}
+        {{/each}}
+      {{/x-select}}
+    {{/form.field}}
+  </div>
 
   <div class="flexrow">
-
     {{#if useCurrentLocation}}
       ZipCode: Current Location
     {{else}}
@@ -28,20 +30,18 @@
         }}
       {{/form.field}}
 
-      <button class="btn btn-link" {{action "setCurrentLocation"}}>
+      or
+
+      <p class="btn" {{action "setCurrentLocation"}}>
         Use Current Location
-      </button>
+      </p>
     {{/if}}
-
   </div>
 
-  <div>
-    <div class="col-xs-4 end-xs">
-      <button
-          class={{concat "btn btn-default" (if waitingForLocation " disabled")}}
-          {{action form.actions.submit}}>
-        Find Groups
-      </button>
-    </div>
-  </div>
+  <button
+      class={{concat "btn btn-primary" (if waitingForLocation " disabled")}}
+      disabled={{waitingForLocation}}
+      {{action form.actions.submit}}>
+    Find Groups
+  </button>
 {{/x-form}}

@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
     },
     loadMore() {
       let parent = this.get('parent');
-      let results = parent.get('page') + 20;
+      let results = parent.get('page') + 200;
       parent.set('page', results);
     }
   }

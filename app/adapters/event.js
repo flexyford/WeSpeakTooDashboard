@@ -6,7 +6,7 @@ export default ApplicationAdapter.extend({
   host: 'https://api.meetup.com',
   query(store, type, query) {
     let params = {
-      page: 20,
+      page: 200,
       limited_events: false,
       group_id: query.group_id,
       time: '1451610000000,',
