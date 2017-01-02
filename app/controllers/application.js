@@ -3,13 +3,18 @@ import Ember from 'ember';
 const { get } = Ember;
 
 export default Ember.Controller.extend({
-  isFindParent: Ember.computed('currentRouteName', function() {
-    let childRoutes = ['groups.index', 'groups.group.events'];
-    return childRoutes.includes( get(this, 'currentRouteName') );
+  isFindDisabled: Ember.computed('currentRouteName', function() {
+    let routes = ['index', 'groups.index', 'groups.group.events'];
+    return !routes.includes( get(this, 'currentRouteName') );
   }),
 
-  isSelectParent: Ember.computed('currentRouteName', function() {
-    let childRoutes = ['groups.group.events'];
-    return childRoutes.includes( get(this, 'currentRouteName') );
+  isSelectDisabled: Ember.computed('currentRouteName', function() {
+    let routes = ['groups.index', 'groups.group.events'];
+    return !routes.includes( get(this, 'currentRouteName') );
+  }),
+
+  isNotateDisabled: Ember.computed('currentRouteName', function() {
+    let routes = ['groups.group.events'];
+    return !routes.includes( get(this, 'currentRouteName') );
   })
 });

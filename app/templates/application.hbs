@@ -7,19 +7,19 @@
   {{#link-to 'index'
      tagName="span"
      class=(concat "breadcrumb"
-     (if isFindParent " parent")
+     (if isFindDisabled " disabled")
      )}}Find{{/link-to}}
   <span> > </span>
   {{#link-to 'groups.index'
      tagName="span"
      class=(concat "breadcrumb"
-     (if isSelectParent " parent")
+     (if isSelectDisabled " disabled")
      )}}Select{{/link-to}}
   <span> > </span>
   {{#link-to 'groups.group.events'
      tagName="span"
      class=(concat "breadcrumb"
-     (if isNotateParent " parent")
+     (if isNotateDisabled " disabled")
      )}}Notate{{/link-to}}
   <span> > </span>
   <span class="breadcrumb disabled">Export</span>

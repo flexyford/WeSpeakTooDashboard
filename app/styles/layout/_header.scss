@@ -24,27 +24,25 @@ h2 {
 }
 
 .breadcrumbs {
+  color: $electric-violet;
 
   .breadcrumb {
-    pointer-events: none;
     cursor: pointer;
 
-    &.active, &.parent {
-      pointer-events: auto;
-      color: $electric-violet;
+    &.active, &:hover {
       text-decoration: underline;
     }
 
-    &.parent {
+    &.disabled {
+      color: $silver;
+      opacity: 0.65;
+      pointer-events: none;
       text-decoration: none;
+    }
 
-      &:hover {
-        text-decoration: underline;
-      }
-
-      + span {
-        color: $electric-violet;
-      }
+    &.active + span, &.disabled + span {
+      color: $silver;
+      opacity: 0.65;
     }
   }
 }
