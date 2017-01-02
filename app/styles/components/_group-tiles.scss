@@ -3,7 +3,7 @@ ul.groups__index {
   padding: 0;
 
   .tile {
-    width: 250px;
+    width: 100%;
     padding: 0.4em;
     border-top: solid;
     border-width: thin;
@@ -18,6 +18,9 @@ ul.groups__index {
 
     &-body {
 
+      width: 90%;
+      display: inline-block;
+
       &__title {
         color: $shamrock;
         margin-bottom: 0.25em;
@@ -30,6 +33,12 @@ ul.groups__index {
         text-transform: uppercase;
         font-family: $thin;
       }
+    }
+
+    &-remove {
+      width: calc(10% - (2 * 0.4em) );
+      display: inline-block;
+      float: right;
     }
   }
 }

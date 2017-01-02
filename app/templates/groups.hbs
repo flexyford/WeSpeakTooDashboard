@@ -1,42 +1,47 @@
-<div class="col-lg-3">
-  <ul class="groups__index">
-    {{#each selectedGroups as |meetup|}}
-      {{#link-to 'groups.group' meetup
-         tagName="li"
-         class="tile"
-      }}
-        <div class="tile-body">
-          <div class="tile-body__title">
-            {{meetup.name}}
-          </div>
-          <div class="tile-body__events">
-            {{#if meetup.events.length}}
-              {{meetup.events.length}} Events
-            {{else}}
-              Events Unknown
-            {{/if}}
-          </div>
-        </div>
-      {{/link-to}}
-      <div class="tile-remove" {{action "removeGroup" meetup}}>X</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="groups__index">
+        {{#each selectedGroups as |meetup|}}
+          {{#link-to 'groups.group' meetup
+             tagName="li"
+             class="tile"
+          }}
+            <div class="tile-body">
+              <div class="tile-body__title">
+                {{meetup.name}}
+              </div>
+              <div class="tile-body__events">
+                {{#if meetup.events.length}}
+                  {{meetup.events.length}} Events
+                {{else}}
+                  Events Unknown
+                {{/if}}
+              </div>
+            </div>
+            <div class="tile-remove" {{action "removeGroup" meetup}}>X</div>
+          {{/link-to}}
+
     {{else}}
-      <div class="no_tiles">
-        <h3>Select Meetups</h3>
-      </div>
-    {{/each}}
-  </ul>
+          <div class="no_tiles">
+            <h3>Select Meetups</h3>
+          </div>
+        {{/each}}
+      </ul>
 
-  {{export-csv groups=selectedGroups disabled=noneSelected}}
+      {{export-csv groups=selectedGroups disabled=noneSelected}}
 
-  {{#if isGroupsRoute}}
-    {{#link-to 'groups.group' selectedGroups.firstObject
-       tagName="button"
-       class=(concat "btn btn-primary" (unless selectedGroups.firstObject "disabled"))
-    }}
-      Identify Events
-    {{/link-to}}
-  {{/if}}
-</div>
-<div class="col-lg-9">
-  {{outlet}}
+      {{#if isGroupsRoute}}
+        {{#link-to 'groups.group' selectedGroups.firstObject
+           tagName="button"
+           class=(concat "btn btn-primary" (unless selectedGroups.firstObject "disabled"))
+        }}
+          Identify Events
+        {{/link-to}}
+      {{/if}}
+    </div>
+    <div class="col-sm-9">
+      {{outlet}}
+    </div>
+  </div>
 </div>
