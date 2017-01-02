@@ -1,35 +1,15 @@
 import Ember from 'ember';
 
-const { get, set } = Ember;
+const { get } = Ember;
 
 export default Ember.Controller.extend({
-  isFindActive: true,
-
-  isSelectActive: Ember.computed('currentRouteName', function() {
-    let isSelectActive = false;
-
-    debugger;
-
-    switch( get(this, 'currentRouteName') ) {
-    case 'groups.group.events':
-      isSelectActive = true;
-    case 'groups.index':
-      isSelectActive = true;
-    }
-
-    return isSelectActive;
+  isFindParent: Ember.computed('currentRouteName', function() {
+    let childRoutes = ['groups.index', 'groups.group.events'];
+    return childRoutes.includes( get(this, 'currentRouteName') );
   }),
 
-  isNotateActive: Ember.computed('currentRouteName', function() {
-    let isNotateActive = false;
-
-    switch( get(this, 'currentRouteName') ) {
-    case 'groups.group.events':
-      isNotateActive = true;
-    }
-
-    return isNotateActive;
-  }),
-
-  isExportActive: false
+  isSelectParent: Ember.computed('currentRouteName', function() {
+    let childRoutes = ['groups.group.events'];
+    return childRoutes.includes( get(this, 'currentRouteName') );
+  })
 });

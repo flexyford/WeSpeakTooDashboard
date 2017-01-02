@@ -25,23 +25,26 @@ h2 {
 
 .breadcrumbs {
 
-  .bold {
-    color: $electric-violet;
-  }
-
   .breadcrumb {
+    pointer-events: none;
     cursor: pointer;
 
-    &.active {
+    &.active, &.parent {
+      pointer-events: auto;
+      color: $electric-violet;
       text-decoration: underline;
     }
 
-    &:hover {
-      text-decoration: underline;
-    }
+    &.parent {
+      text-decoration: none;
 
-    &.disabled {
-      pointer-events: none;
+      &:hover {
+        text-decoration: underline;
+      }
+
+      + span {
+        color: $electric-violet;
+      }
     }
   }
 }

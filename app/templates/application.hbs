@@ -7,21 +7,21 @@
   {{#link-to 'index'
      tagName="span"
      class=(concat "breadcrumb"
-     (if isFindActive " bold" " disabled")
+     (if isFindParent " parent")
      )}}Find{{/link-to}}
-  <span class={{if isFindActive "bold"}}> > </span>
+  <span> > </span>
   {{#link-to 'groups.index'
      tagName="span"
      class=(concat "breadcrumb"
-     (if isSelectActive " bold" " disabled")
+     (if isSelectParent " parent")
      )}}Select{{/link-to}}
-  <span class={{if isNotateActive "bold"}}> > </span>
+  <span> > </span>
   {{#link-to 'groups.group.events'
      tagName="span"
      class=(concat "breadcrumb"
-     (if isNotateActive " bold" " disabled")
+     (if isNotateParent " parent")
      )}}Notate{{/link-to}}
-  <span class={{if isExportActive "bold"}}> > </span>
+  <span> > </span>
   <span class="breadcrumb disabled">Export</span>
 </h3>
 
