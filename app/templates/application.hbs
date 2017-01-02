@@ -1,5 +1,28 @@
-{{#link-to 'index' tagName="h1"}}
-  WE SPEAK TOO DASHBOARD
+{{#link-to 'index' tagName="h1" class="site-header"}}
+  <h1 class="title">We Speak Too | </h1>
+  <h2 class="description">Meetup Speaker Notation Tool</h2>
 {{/link-to}}
+
+<h3 class="breadcrumbs">
+  {{#link-to 'index'
+     tagName="span"
+     class=(concat "breadcrumb"
+     (if isFindDisabled " disabled")
+     )}}Find{{/link-to}}
+  <span> > </span>
+  {{#link-to 'groups.index'
+     tagName="span"
+     class=(concat "breadcrumb"
+     (if isSelectDisabled " disabled")
+     )}}Select{{/link-to}}
+  <span> > </span>
+  {{#link-to 'groups.group.events'
+     tagName="span"
+     class=(concat "breadcrumb"
+     (if isNotateDisabled " disabled")
+     )}}Notate{{/link-to}}
+  <span> > </span>
+  <span class="breadcrumb disabled">Export</span>
+</h3>
 
 {{outlet}}

@@ -9,6 +9,7 @@
 @import "components/buttons";
 @import "components/group-tiles";
 @import "components/x-file-input";
+@import "layout/header";
 
 // Last so we win the specificity battle.
 @import "abstracts/utilities";
