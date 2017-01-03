@@ -42,7 +42,6 @@ export default Ember.Component.extend({
     },
     submit(changeset) {
       let params = Object.assign({}, get(this, 'defaults'), changeset);
-      console.log("params = ", params);
       get(this, 'on-submit')(params);
     }
   }

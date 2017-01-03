@@ -1,47 +1,37 @@
 {{#x-form
-   class="test-meetup-request-form"
+   class="meetup-find-form"
    data=defaults
    onSubmit=(action "submit")
    as |form|
 }}
-  <div class="flexrow">
-    {{#form.field property="category" as |field|}}
-      Category:
-      {{#x-select
-         value=field.value
-         action=(action field.actions.onChange)
-         as |xs|}}
-        {{#each categories as |category|}}
-          {{#xs.option value=category.value}}{{category.name}}{{/xs.option}}
-        {{/each}}
-      {{/x-select}}
-    {{/form.field}}
-  </div>
+  {{#form.field property="zip" class="form-row" as |field|}}
 
-  <div class="flexrow">
     {{#if useCurrentLocation}}
-      ZipCode: Current Location
+      <span class="center">ZipCode: Current Location</span>
     {{else}}
-      {{#form.field property="zip" as |field|}}
-        ZipCode: {{one-way-input
-          value=field.value
-          update=(action field.actions.onChange)
-          name="zipcode"
-        }}
-      {{/form.field}}
+      <div class="form-row">
+        <button class="btn btn-default" {{action "setCurrentLocation"}}>
+          Use Current Location
+        </button>
+      </div>
 
-      or
+      <span class="center">or</span>
 
-      <p class="btn" {{action "setCurrentLocation"}}>
-        Use Current Location
-      </p>
+      Enter ZipCode:
+      {{one-way-input
+        value=field.value
+        update=(action field.actions.onChange)
+        name="zipcode"
+      }}
+
     {{/if}}
-  </div>
 
-  <button
-      class={{concat "btn btn-primary" (if waitingForLocation " disabled")}}
-      disabled={{waitingForLocation}}
-      {{action form.actions.submit}}>
-    Find Groups
-  </button>
+    <button
+        class={{concat "btn btn-primary" (if waitingForLocation " disabled")}}
+        disabled={{waitingForLocation}}
+        {{action form.actions.submit}}>
+      Find Groups
+    </button>
+
+  {{/form.field}}
 {{/x-form}}

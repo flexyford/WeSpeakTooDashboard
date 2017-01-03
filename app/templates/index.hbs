@@ -1,15 +1,17 @@
 {{!-- Meetup Search Form --}}
 {{meetup-group-form on-submit=(action "submit")}}
 
-or
+<span class="center">or</span>
 
 {{!-- Import Existing File --}}
-{{#x-file-input
-   tagName="a"
-   class="btn btn-default"
-   alt="import csv"
-   accept="csv"
-   action="import"
-}}
-  Import Meetup Groups
-{{/x-file-input}}
+<div class="test-import center">
+  {{#x-file-input
+     tagName="a"
+     class="btn btn-default center"
+     alt="import csv"
+     accept="csv"
+     action="import"
+  }}
+    Import Meetup Groups
+  {{/x-file-input}}
+</div>
