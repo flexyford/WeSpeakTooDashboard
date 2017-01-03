@@ -6,25 +6,23 @@
 }}
   {{#form.field property="zip" class="form-row" as |field|}}
 
-    {{#if useCurrentLocation}}
-      <span class="center">ZipCode: Current Location</span>
-    {{else}}
-      <div class="form-row">
-        <button class="btn btn-default" {{action "setCurrentLocation"}}>
-          Use Current Location
-        </button>
-      </div>
+    <div class="form-row">
+      <button
+          class={{concat "btn btn-primary" (unless currentLocation " disabled")}}
+          disabled={{unless currentLocation " disabled"}}
+          {{action "setCurrentLocation"}}>
+        Use Current Location
+      </button>
+    </div>
 
-      <span class="center">or</span>
+    <span class="center">or</span>
 
-      Enter ZipCode:
-      {{one-way-input
-        value=field.value
-        update=(action field.actions.onChange)
-        name="zipcode"
-      }}
-
-    {{/if}}
+    Enter ZipCode:
+    {{one-way-input
+      value=field.value
+      update=(action field.actions.onChange)
+      name="zipcode"
+    }}
 
     <button
         class={{concat "btn btn-primary" (if waitingForLocation " disabled")}}

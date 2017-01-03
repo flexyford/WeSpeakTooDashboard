@@ -1,7 +1,6 @@
 import Ember from 'ember';
-import ENV from "austin-speaks-too/config/environment";
 
-const { get, set } = Ember;
+const { get } = Ember;
 
 import { CATEGORIES } from 'austin-speaks-too/utils/meetup';
 
@@ -10,6 +9,7 @@ const [ LATITUDE, LONGITUDE ] = [ 0, 1 ];
 export default Ember.Component.extend({
   geolocation: Ember.inject.service(),
   currentLocation: Ember.computed.oneWay('geolocation.currentLocation'),
+  noCurrentLocation: Ember.computed.not('currentLocation'),
 
   params: null,
 
@@ -39,7 +39,10 @@ export default Ember.Component.extend({
   actions: {
     setCurrentLocation() {
       this.set('useCurrentLocation', true);
+      let params = Object.assign({}, get(this, 'defaults'));
+      get(this, 'on-submit')(params);
     },
+
     submit(changeset) {
       let params = Object.assign({}, get(this, 'defaults'), changeset);
       get(this, 'on-submit')(params);
