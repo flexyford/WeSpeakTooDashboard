@@ -9,6 +9,16 @@ module.exports = function(environment) {
 
     MEETUP_KEY: process.env.MEETUP_KEY,
 
+    metricsAdapters: [
+      {
+        name: 'GoogleAnalytics',
+        environments: ['development', 'production'],
+        config: {
+          id: 'UA-89946138-1'
+        }
+      }
+    ],
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
