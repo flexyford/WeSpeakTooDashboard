@@ -1,10 +1,23 @@
-{{#link-to 'groups.index'
-   tagName="button"
-   class="btn btn-default"
-}}
-  Back To Select Groups
-{{/link-to}}
+<h1>{{model.name}}</h1>
 
-<h1>Group {{model.name}}</h1>
+{{#if model.totalSpeakers}}
+<div class="row group-speakers">
+  <div class="col-sm-3 group-speakers__male">
+    <span class="count">{{model.maleSpeakers}}</span>
+    <span class="identity">Male</span>
+    <span class="percent">({{model.malePercentage}}%)</span>
+  </div>
+  <div class="col-sm-3 group-speakers__female">
+    <span class="count">{{model.femaleSpeakers}}</span>
+    <span class="identity">Female</span>
+    <span class="percent">({{model.femalePercentage}}%)</span>
+  </div>
+  <div class="col-sm-3 group-speakers__nonbinary">
+    <span class="count">{{model.nonBinarySpeakers}}</span>
+    <span class="identity">Non-Binary</span>
+    <span class="percent">({{model.nonBinaryPercentage}}%)</span>
+  </div>
+</div>
+{{/if}}
 
 {{outlet}}

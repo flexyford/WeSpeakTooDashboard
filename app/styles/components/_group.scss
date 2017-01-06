@@ -1,0 +1,19 @@
+.group-speakers {
+  &__male, &__female, &__nonbinary {
+    text-align: center;
+    display: flex;
+    align-items: center;
+  }
+  .count {
+    color: $shamrock;
+    font-size: 30px;
+    margin-right: 5px;
+  }
+  .percent {
+    margin-right: 5px;
+  }
+  .identity {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+}

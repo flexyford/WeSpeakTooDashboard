@@ -11,14 +11,23 @@ export default DS.Model.extend({
   maleSpeakers: DS.attr('number'),
   femaleSpeakers: DS.attr('number'),
   nonBinarySpeakers: DS.attr('number'),
-  noSpeakers: DS.attr('boolean'),
 
   group: DS.belongsTo('group'),
 
+  total: Ember.computed('maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers', function() {
+    return ['maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers']
+      .reduce((total, identity) => {
+        let identityCount = get(this, identity) || 0;
+        return total + identityCount;
+      }, 0);
+  }),
+
   noSpeakers: Ember.computed('maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers', function() {
-    return get(this, 'maleSpeakers') === 0 &&
-      get(this, 'femaleSpeakers') === 0 &&
-      get(this, 'nonBinarySpeakers') === 0;
+    return ['maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers']
+      .reduce((noSpeakers, identity) => {
+        let foundNone = get(this, identity) === 0;
+        return noSpeakers && foundNone;
+      }, true);
   }),
 
   isNotated: Ember.computed.bool('_speakers'),
