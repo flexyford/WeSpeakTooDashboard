@@ -8,6 +8,7 @@ module.exports = function(environment) {
     locationType: 'auto',
 
     MEETUP_KEY: process.env.MEETUP_KEY,
+    DATADOTWORLD_KEY: process.env.DATADOTWORLD_KEY,
 
     metricsAdapters: [
       {
