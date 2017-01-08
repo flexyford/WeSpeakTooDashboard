@@ -1,4 +1,5 @@
 // Buttons
+
 .btn {
   cursor: pointer;
   text-decoration:none;
@@ -20,12 +21,6 @@
     -webkit-box-shadow: none;
     box-shadow: none;
     text-decoration: none;
-  }
-
-  &:hover {
-      background-color: $shamrock;
-      border: solid 3px $shamrock;
-      color: $white;
   }
 
   &[disabled="true"] {
@@ -52,9 +47,9 @@
       color: $electric-violet;
     }
     &:hover {
-        background-color: $electric-violet;
-        color: white;
-        border-color: $electric-violet;
+        background-color: $shamrock;
+        border: solid 3px $shamrock;
+        color: $white;
     }
   }
 
@@ -73,7 +68,19 @@
       color: $white;
     }
     &:hover {
-      color: $white;
+        background-color: $shamrock;
+        border: solid 3px $shamrock;
+        color: $white;
     }
   }
+}
+
+.counter {
+  color: $white;
+  background-color: $electric-violet;
+  border: none;
+  padding: 1px 4px;
+  font-size: 1em;
+  border-radius: 3px;
+  margin: 0 1px;
 }

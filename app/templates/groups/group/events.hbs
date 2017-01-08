@@ -10,36 +10,36 @@
 
       <div class="col-xs-3 gender-counts">
         <div class="gender-count">
-          <button class="btn btn-primary {{unless event.hasMale "disabled"}}"
+          <button class="btn counter {{unless event.hasMale "disabled"}}"
                   disabled={{unless event.hasMale "true"}}
                   {{action "decrement" event "male" "female"}}>-</button>
           <p style="display:inline" class="gender-count__details">
             Male Speakers: {{if event.isNotated event.maleSpeakers "0"}}
           </p>
-          <button class="btn btn-primary" {{action "increment" event "male"}}>+</button>
+          <button class="btn counter" {{action "increment" event "male"}}>+</button>
         </div>
         <div class="gender-count">
-          <button class="btn btn-primary {{unless event.hasFemale "disabled"}}"
+          <button class="btn counter {{unless event.hasFemale "disabled"}}"
                   disabled={{unless event.hasFemale "true"}}
                   {{action "decrement" event "female"}}>-</button>
           <p style="display:inline" class="gender-count__details">
             Female Speakers: {{if event.isNotated event.femaleSpeakers "0"}}
           </p>
-          <button class="btn btn-primary" {{action "increment" event "female"}}>+</button>
+          <button class="btn counter" {{action "increment" event "female"}}>+</button>
         </div>
         <div class="gender-count non-binary">
-          <button class="btn btn-primary {{unless event.hasNonBinary "disabled"}}"
+          <button class="btn counter {{unless event.hasNonBinary "disabled"}}"
                   disabled={{unless event.hasNonBinary "true"}}
                   {{action "decrement" event "nonBinary"}}>-</button>
           <p style="display:inline" class="gender-count__details">
             Non-Binary Speakers: {{if event.isNotated event.nonBinarySpeakers "0"}}
           </p>
-          <button class="btn btn-primary" {{action "increment" event "nonBinary"}}>+</button>
+          <button class="btn counter" {{action "increment" event "nonBinary"}}>+</button>
         </div>
         <div class="gender-count row no-speakers">
           <!-- Consider a Toggle Switch for No Speakers -->
           <button
-              class="btn btn-primary {{if event.isNotated "disabled"}}"
+              class="btn btn-default {{if event.isNotated "disabled"}}"
               disabled={{if event.isNotated "true"}}
               {{action "none" event}}>
             No Speakers

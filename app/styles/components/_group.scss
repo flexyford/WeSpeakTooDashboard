@@ -1,9 +1,7 @@
-h5 {
-  background-color: $polar;
-}
-
 .eventname {
   margin-left: 20px;
+  color: $shamrock;
+  font-size: 1.5em;
 }
 
 .eventlist {
@@ -36,7 +34,7 @@ h5 {
   background-color: $polar;
 
   &__male, &__female, &__nonbinary {
-    margin-top: 1em;
+    margin-top: 1.25em;
     text-align: center;
     display: flex;
     align-items: center;
@@ -49,14 +47,14 @@ h5 {
   }
   .count {
     color: $shamrock;
-    font-size: 30px;
+    font-size: 1.5em;
     margin-right: 5px;
   }
   .percent {
     margin-right: 5px;
   }
   .identity {
-    font-size: 20px;
+    font-size: 1em;
     margin-right: 5px;
   }
 }

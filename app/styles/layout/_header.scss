@@ -14,7 +14,8 @@
 // }
 
 .site-header {
-  background-color: #f1f1f1;
+  background-color: $alabaster;
+  border-bottom: solid 5px $electric-violet;
   padding: 20px;
   margin: 0;
   cursor: pointer;
