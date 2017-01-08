@@ -2,23 +2,31 @@ h5 {
   background-color: $polar;
 }
 
+.eventname {
+  margin-left: 20px;
+}
+
 .eventlist {
-    height: 375px;
-    overflow: auto;
+    height: 100%;
     background-color: $polar;
     list-style-type: none;
+    padding-right: 2em;
+    margin-bottom: 2em;
+    height: 100%;
     li {
-      padding: 0;
+      padding: 1em 1em 1em 0;
       border-bottom: 1.5em;
-      padding-top: 1em;
       background-color: #fff;
       clear: both;
+      border: solid 7px $alabaster;
     }
     .gender-counts {
-      background-color: $polar;
-      padding: 2em;
+      margin-top: 1.5em;
+      background-color: $alabaster;
+      padding: 1em;
       .gender-count {
         margin-top: 1em;
+        margin-bottom: 1em;
       }
     }
 }
@@ -28,6 +36,7 @@ h5 {
   background-color: $polar;
 
   &__male, &__female, &__nonbinary {
+    margin-top: 1em;
     text-align: center;
     display: flex;
     align-items: center;

@@ -4,11 +4,8 @@
 
   .tile {
     width: 100%;
-    padding: 0.4em;
-    border-top: solid;
-    border-width: thin;
-    border-color: $polar;
-    margin-top: 0.25em;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
     background-color: $alabaster;
     cursor: pointer;
     display: block;
@@ -27,10 +24,11 @@
         margin-bottom: 0.25em;
         overflow: hidden;
         white-space: nowrap;
+        font-size: 1.5em;
       }
 
       &__events {
-        font-size: 0.7em;
+        font-size: 0.75em;
         text-transform: uppercase;
         font-family: $primary;
       }
@@ -50,9 +48,9 @@ ul.groups__all {
 
   .tile {
     width: 250px;
-    margin-top: 0.5em;
     margin-right: 0.5em;
-    border: none;
+    margin-bottom: 1em;
+    margin-left: 0.25em;
     background-color: $alabaster;
     cursor: pointer;
     display: inline-block;
@@ -63,14 +61,12 @@ ul.groups__all {
     }
 
     &.selected {
-      border: solid;
-      border-width: thin;
-      border-color: $shamrock;
+      border: solid 5px $shamrock;
       opacity: 0.65;
     }
 
     &-image-container {
-      height: 80px;
+      height: 100%;
       padding: 0;
       overflow: hidden;
       padding: 1em;
@@ -80,17 +76,24 @@ ul.groups__all {
       margin-bottom: 0.5em;
       padding-bottom: 61.803%; // golden ratio
       position: relative;
+      background-image: linear-gradient(rgba(216,247,245,1.0) 20%,rgba(216,247,245,0.4) 90%);
+      vertical-align: middle;
+      overflow: hidden;
 
       .tile-image {
+        z-index: 0;
         left: 0;
-        opacity: 0.25;
         position: absolute;
         top: 0;
-        padding: 1.125em;
+        // padding: 1.125em;
+        vertical-align: middle;
+        // margin: 0 auto;
         width: 100%;
-        height: 100%;
-        // TODO: maybe not this
+        height: auto;
+        // // // TODO: maybe not this
         object-fit: contain;
+        opacity: 0.45;
+        overflow: hidden;
       }
     }
 
