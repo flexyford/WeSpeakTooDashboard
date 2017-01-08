@@ -1,8 +1,42 @@
+h5 {
+  background-color: $polar;
+}
+
+.eventlist {
+    height: 375px;
+    overflow: auto;
+    background-color: $polar;
+    list-style-type: none;
+    li {
+      padding: 0;
+      border-bottom: 1.5em;
+      padding-top: 1em;
+      background-color: #fff;
+      clear: both;
+    }
+    .gender-counts {
+      background-color: $polar;
+      padding: 2em;
+      .gender-count {
+        margin-top: 1em;
+      }
+    }
+}
+
 .group-speakers {
+
+  background-color: $polar;
+
   &__male, &__female, &__nonbinary {
     text-align: center;
     display: flex;
     align-items: center;
+  }
+  div {
+      h4 {
+      margin-top: 0;
+      padding: 10px 35px;
+    }
   }
   .count {
     color: $shamrock;

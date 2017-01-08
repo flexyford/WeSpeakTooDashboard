@@ -1,19 +1,21 @@
 .ember-application {
-  margin: 1em;
+  margin: 0em;
 }
 
 // Headers
 h1 {
-  font-family: Avenir;
-  color: $electric-violet;
+  font-family: $headerfont, 400;
+  color: $gray;
 }
 
 h2 {
-  font-family: $primary;
+  font-family: $primary, 100;
   color: $gray;
 }
 
 .site-header {
+  background-color: #f1f1f1;
+  padding: 20px;
   margin: 0;
   cursor: pointer;
 
@@ -24,8 +26,9 @@ h2 {
 }
 
 .breadcrumbs {
-  padding-left: 15px;
+  padding: 10px 20px;
   color: $electric-violet;
+  font-weight: 300;
 
   .breadcrumb {
     cursor: pointer;
@@ -35,15 +38,13 @@ h2 {
     }
 
     &.disabled {
-      color: $silver;
-      opacity: 0.65;
+      color: $gray;
       pointer-events: none;
       text-decoration: none;
     }
 
     &.active + span, &.disabled + span {
-      color: $silver;
-      opacity: 0.65;
+      color: $gray;
     }
   }
 }

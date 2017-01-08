@@ -3,24 +3,28 @@
   cursor: pointer;
   text-decoration:none;
   font-size:12px;
-  font-weight:bold;
-  padding:0 15px;
-  line-height:32px;
+  padding:5px 15px;
   height: auto;
   display:inline-block;
   text-align:center;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  border-radius: 16px;
+  -webkit-border-radius: 32px;
+  -moz-border-radius: 32px;
+  border-radius: 32px;
   border-style: solid;
   border-width: 2px;
 
-  &:active, &:focus, &:hover {
+  &:active, &:focus {
     background-image: none;
     outline: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
     text-decoration: none;
+  }
+
+  &:hover {
+      background-color: $shamrock;
+      border: solid 2px $shamrock;
+      color: #fff;
   }
 
   &[disabled="true"] {
@@ -43,8 +47,13 @@
       border-color: $silver;
     }
 
-    &:active, &:focus, &:hover {
+    &:active, &:focus {
       color: $electric-violet;
+    }
+    &:hover {
+        background-color: $electric-violet;
+        color: white;
+        border-color: $electric-violet;
     }
   }
 
@@ -56,11 +65,14 @@
     &.disabled {
       color: $white;
       background-color: $silver;
-      border-color: $white;
+      border-color: $silver;
     }
 
-    &:active, &:focus, &:hover {
+    &:active, &:focus {
       color: $white;
+    }
+    &:hover {
+      color: #fff;
     }
   }
 }

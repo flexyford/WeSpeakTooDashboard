@@ -8,3 +8,13 @@
 @mixin hover-transition($property, $speed: 200ms) {
   transition: $property $speed cubic-bezier(0.47, 0, 0.75, 0.72);
 }
+
+// Use @include colorize('image.png', red, 0.5)
+@mixin colorize($image, $color, $opacity) {
+      background: $color;
+      $color: transparentize($color, 1 - $opacity);
+      background: -webkit-linear-gradient(left, $color, $color), url($image);
+      background: -moz-linear-gradient(left, $color, $color), url($image);
+      background: -ms-linear-gradient(left, $color, $color), url($image);
+      background: -o-linear-gradient(left, $color, $color), url($image);
+}

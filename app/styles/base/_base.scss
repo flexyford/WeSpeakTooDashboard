@@ -2,6 +2,31 @@
 
 // Layout
 body {
-  font-family: $primary;
+  font-family: 'Roboto';
+  font-weight: 300;
+}
+
+h1 {
+  font-family: $headerfont;
   color: $gray;
+}
+
+h2 {
+  font-family: 'roboto';
+  font-weight: 300;
+}
+
+h3 {
+  font-family: 'roboto';
+  font-weight: 300;
+}
+
+h4 {
+  font-family: 'roboto';
+  font-weight: 300;
+}
+
+h5 {
+  font-family: 'roboto';
+  font-weight: 300;
 }

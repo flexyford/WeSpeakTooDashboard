@@ -1,7 +1,40 @@
 .meetup-find-form {
 
+  background-color: #f2f2f2;
+  height: 500px;
+
+  p {
+    margin: 1em 0;
+    padding: 0 3em;
+  }
+
+  .btn {
+    margin: 1em 0;
+  }
+
+
   .form-row {
     text-align:center;
     margin:auto;
+  }
+
+  span {
+    margin: 1em 0em;
+  }
+
+}
+
+.button {
+  margin-top: 1em;
+}
+
+h4 {
+  margin-top: 1em;
+}
+
+.zipcode {
+  margin-top: 1em;
+    input {
+  text-align: center;
   }
 }

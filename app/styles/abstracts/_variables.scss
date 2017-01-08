@@ -2,21 +2,17 @@ $spacer: 1em;
 
 // Colors
 // named with http://chir.ag/projects/name-that-color
-$electric-violet: #5224fb;
+$electric-violet: #ff00cc;
 $shamrock: #2bbab0;
 $polar: #daf7f5;  // polar
 $silver: #c0c0c0;  // silver
-$gray: #888888; // gray
+$gray: #2d2d2d; // gray
 $alabaster: #f9f9f9;    // alabaster
 $white: #FFFFFF;
 
 // Fonts
-$thin: "Roboto-Thin";
-$light: "Roboto-Light";
-$primary: "Roboto-Regular";
-$semi-bold: "Roboto-Semibold";
-$bold: "Roboto-Bold";
-$extra-bold: "Roboto-Black";
+$headerfont: 'Russo One';
+$primary: 'Roboto';
 
 // Breakpoints
 $breakpoint-small-up: 30.063em;

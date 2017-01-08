@@ -1,17 +1,24 @@
 {{!-- Meetup Search Form --}}
-{{meetup-group-form on-submit=(action "submit")}}
+<div class="col-xs-6">
+  {{meetup-group-form on-submit=(action "submit")}}
+</div>
 
-<span class="center">or</span>
+<div class="col-xs-6">
+  <h4 class = "center">Resume</h4>
+  <p class = "center">Have a dataset for your city already?</p>
+  <br><br>
+  <a class = "center" target = "new" href = "https://data.world/flexyford/wespeaktoo-austin-2016/file/wespeaktoo-austin-2016.csv">Austin </a><br><br>
 
-{{!-- Import Existing File --}}
-<div class="test-import center">
-  {{#x-file-input
-     tagName="a"
-     class="btn btn-default center"
-     alt="import csv"
-     accept="csv"
-     action="import"
-  }}
-    Import Meetup Groups
-  {{/x-file-input}}
+  {{!-- Import Existing File --}}
+  <div class="test-import center">
+    {{#x-file-input
+      tagName="a"
+      class="btn btn-default center"
+      alt="import csv"
+       accept="csv"
+       action="import"
+    }}
+      Import Meetup Groups
+    {{/x-file-input}}
+  </div>
 </div>
