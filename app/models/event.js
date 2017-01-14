@@ -1,6 +1,10 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
+import momentComputed from 'ember-moment/computeds/moment';
+import format from 'ember-moment/computeds/format';
+import locale from 'ember-moment/computeds/locale';
+
 const { get } = Ember;
 
 export default DS.Model.extend({
@@ -8,11 +12,19 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   rsvp: DS.attr('string'),
 
+  time: DS.attr('number'), // Time Since the Epoch
+
   maleSpeakers: DS.attr('number'),
   femaleSpeakers: DS.attr('number'),
   nonBinarySpeakers: DS.attr('number'),
 
   group: DS.belongsTo('group'),
+
+  date: Ember.computed('time', function() {
+    return new Date(get(this, 'time'));
+  }),
+
+  dateFormatted: format(locale(momentComputed('date'), 'moment.locale'), 'MMMM DD, YYYY'),
 
   total: Ember.computed('maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers', function() {
     return ['maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers']
