@@ -5,11 +5,14 @@ const speakerKeys = ['maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers'];
 export default Ember.Controller.extend({
   events: Ember.computed.alias('model'),
 
+  sortByTimeDesc: ['time:desc'],
+  sortedEvents: Ember.computed.sort('events', 'sortByTimeDesc'),
+
   actions: {
     decrement(event, speaker) {
       let speakerKey = `${speaker}Speakers`;
       let count = event.get(speakerKey);
-      if (!count) return;
+      if (!count) { return; }
       event.set(speakerKey, count - 1);
     },
     increment(event, speaker) {

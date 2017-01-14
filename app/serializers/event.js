@@ -11,7 +11,6 @@ export default DS.RESTSerializer.extend({
       if (matches) { hash.id = matches.pop(); }
     }
 
-    hash.rsvp = hash['yes_rsvp_count'];
     hash.description = Ember.String.htmlSafe(hash.description);
 
     let event = this.store.peekRecord('event', hash.id);
@@ -21,11 +20,6 @@ export default DS.RESTSerializer.extend({
       hash.maleSpeakers = event.get('maleSpeakers');
       hash.femaleSpeakers = event.get('femaleSpeakers');
       hash.nonBinarySpeakers = event.get('nonBinarySpeakers');
-    } else if (hash['male_speakers']) {
-      // Importing Event from Meetup CSV
-      hash.maleSpeakers = hash['male_speakers'];
-      hash.femaleSpeakers = hash['female_speakers'];
-      hash.nonBinarySpeakers = hash['non_binary_speakers'];
     }
 
     return this._super(...arguments);

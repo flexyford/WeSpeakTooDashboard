@@ -22,25 +22,30 @@ export default Ember.Controller.extend({
         let columns = data.shift();
 
         let indeces = {
-          group: columns.indexOf('group'),
-          event: columns.indexOf('event'),
+          groupId: columns.indexOf('group_id'),
+          eventId: columns.indexOf('event_id'),
+          eventName: columns.indexOf('event_name'),
+          eventTime: columns.indexOf('event_time'),
           male: columns.indexOf('male'),
           female: columns.indexOf('female'),
           nonBinary: columns.indexOf('non-binary')
         };
 
         let events = data.map((result) => {
+          // Return Keys from `app/model/event`
           return {
-            id: result[indeces.event],
-            male_speakers: result[indeces.male],
-            female_speakers: result[indeces.female],
-            non_binary_speakers: result[indeces.nonBinary],
-            group: result[indeces.group]
+            id: result[indeces.eventId],
+            name: result[indeces.eventName],
+            time: result[indeces.eventTime],
+            maleSpeakers: result[indeces.male],
+            femaleSpeakers: result[indeces.female],
+            nonBinarySpeakers: result[indeces.nonBinary],
+            group: result[indeces.groupId]
           };
         }).filterBy('id');
 
         let groups = data.reduce((groups, result) => {
-          let id = result[indeces.group];
+          let id = result[indeces.groupId];
           if (!groups.find((g) => g.id === id)) {
             return groups.concat({
               id,

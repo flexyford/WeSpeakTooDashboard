@@ -5,20 +5,27 @@
   padding-right: 2em;
   margin-bottom: 2em;
   height: 100%;
-  li {
+
+  .event {
     padding: 1em 1em 1em 0;
     border-bottom: 1.5em;
     background-color: #fff;
     clear: both;
     border: solid 7px $alabaster;
-  }
-  .gender-counts {
-    margin-top: 1.5em;
-    background-color: $alabaster;
-    padding: 1em;
-    .gender-count {
-      margin-top: 1em;
-      margin-bottom: 1em;
+
+    &__title, &__date {
+      color: $shamrock;
+    }
+
+    .gender-counts {
+      margin-top: 1.5em;
+      background-color: $alabaster;
+      padding: 1em;
+
+      .gender-count {
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
     }
   }
 }
