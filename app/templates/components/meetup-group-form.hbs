@@ -6,6 +6,8 @@
 }}
   {{#form.field property="zip" class="form-row" as |field|}}
 
+    <h4>Create New Dataset</h4>
+    <p>Begin creating a meetup dataset for your city by searching for groups nerby.</p>
     <div class="form-row">
       <button
           class={{concat "btn btn-primary" (unless currentLocation " disabled")}}
@@ -15,21 +17,23 @@
       </button>
     </div>
 
-    <span class="center">or</span>
+    <span>or</span>
 
-    Enter ZipCode:
+    <div class = "zipcode">
+    Enter Zip Code:<br>
     {{one-way-input
       value=field.value
       update=(action field.actions.onChange)
       name="zipcode"
     }}
-
+    <br>
     <button
         class={{concat "btn btn-primary" (if waitingForLocation " disabled")}}
         disabled={{waitingForLocation}}
         {{action form.actions.submit}}>
       Find Groups
     </button>
+  </div>
 
   {{/form.field}}
 {{/x-form}}

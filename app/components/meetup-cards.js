@@ -13,7 +13,9 @@ export default Ember.Component.extend({
     groups.forEach((g) => {
       g.set('selected', this.get('selectedGroups').includes(g));
     });
-    return groups;
+    return groups.sort((a,b) => {
+      return parseInt(a.get('members')) - parseInt(b.get('members'));
+    }).reverse();
   }),
 
   actions: {

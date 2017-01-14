@@ -1,17 +1,34 @@
 {{!-- Meetup Search Form --}}
-{{meetup-group-form on-submit=(action "submit")}}
+<div class="row meetup-search">
+  <div class="col-xs-6">
+    {{meetup-group-form on-submit=(action "submit")}}
+  </div>
 
-<span class="center">or</span>
+  <div class="col-xs-6">
+    <div class = "toppad">
+      <h4 class = "center">Import Datasets</h4>
 
-{{!-- Import Existing File --}}
-<div class="test-import center">
-  {{#x-file-input
-     tagName="a"
-     class="btn btn-default center"
-     alt="import csv"
-     accept="csv"
-     action="import"
-  }}
-    Import Meetup Groups
-  {{/x-file-input}}
+      <br><br>
+      <p class = "center">Supported Cities</p>
+      {{#each remoteFiles as |remote|}}
+        <a class="center" {{action "importRemote" remote.url}}>{{remote.name}}</a>
+      {{/each}}
+
+      <br><br>
+      <p class = "center">Have your own dataset?</p>
+
+      {{!-- Import Existing File --}}
+      <div class="test-import center">
+        {{#x-file-input
+           tagName="a"
+           class="btn btn-default center"
+           alt="import csv"
+           accept="csv"
+           action="importLocal"
+        }}
+          Import Meetup Groups
+        {{/x-file-input}}
+      </div>
+    </div>
+  </div>
 </div>
