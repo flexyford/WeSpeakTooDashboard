@@ -3,15 +3,31 @@
 }
 
 // Headers
-// h1 {
-//   font-family: $headerfont, 400;
-//   color: $gray;
-// }
-//
-// h2 {
-//   font-family: $primary, 100;
-//   color: $gray;
-// }
+h1 {
+  font-family: $headerfont;
+  color: $gray;
+  font-size: 65px;
+}
+
+h2 {
+  font-family: 'roboto';
+  font-weight: 200;
+}
+
+h3 {
+  font-family: 'roboto';
+  font-weight: 200;
+}
+
+h4 {
+  font-family: 'roboto';
+  font-weight: 200;
+}
+
+h5 {
+  font-family: 'roboto';
+  font-weight: 200;
+}
 
 .site-header {
   background-color: $alabaster;
