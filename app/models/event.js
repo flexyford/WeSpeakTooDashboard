@@ -10,8 +10,6 @@ const { get } = Ember;
 export default DS.Model.extend({
   name: DS.attr('string'),
   description: DS.attr('string'),
-  rsvp: DS.attr('string'),
-
   time: DS.attr('number'), // Time Since the Epoch
 
   maleSpeakers: DS.attr('number'),

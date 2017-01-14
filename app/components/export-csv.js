@@ -22,7 +22,7 @@ export default Ember.Component.extend({
   csvData: function() {
     // Only Include Groups with Events
     let groups = this.get('groups');
-    let keys = ['group', 'group_name', 'event', 'event_name', 'rsvp', 'male', 'female', 'non-binary'];
+    let keys = ['group_id', 'group_name', 'event_id', 'event_name', 'event_time', 'male', 'female', 'non-binary'];
 
     // http://papaparse.com/docs#unparse-examples
     let csv = PapaParse.unparse({
@@ -37,7 +37,7 @@ export default Ember.Component.extend({
               group.get('name'),
               event.get('id'),
               event.get('name'),
-              event.get('rsvp'),
+              event.get('time'),
               event.get('maleSpeakers'),
               event.get('femaleSpeakers'),
               event.get('nonBinarySpeakers')
