@@ -11,7 +11,11 @@ export default Ember.Controller.extend({
   remoteFiles: [
     {
       name: 'Austin',
-      url: 'https://download.data.world/file_download/flexyford/wespeaktoo-austin-2016/wespeaktoo-austin-2016.csv'
+      url: 'https://download.data.world/file_download/flexyford/wespeaktoo/wespeaktoo-austin.csv'
+    },
+    {
+      name: 'Washington DC',
+      url: 'https://download.data.world/file_download/flexyford/wespeaktoo/wespeaktoo-washington-dc.csv'
     }
   ],
 
