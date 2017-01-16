@@ -19,9 +19,9 @@ export default DS.Model.extend({
   hasEvents: Ember.computed.bool('events.length'),
 
   totalSpeakers: Ember.computed('maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers', function() {
-    return this.get('maleSpeakers') +
-      this.get('femaleSpeakers') +
-      this.get('nonBinarySpeakers');
+    return this.get('maleSpeakers') || 0 +
+      this.get('femaleSpeakers') || 0 +
+      this.get('nonBinarySpeakers') || 0;
   }),
 
   maleSpeakers: Ember.computed('events.@each.maleSpeakers', function() {

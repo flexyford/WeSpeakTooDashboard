@@ -24,28 +24,18 @@ export default DS.Model.extend({
 
   dateFormatted: format(locale(momentComputed('date'), 'moment.locale'), 'MMMM DD, YYYY'),
 
-  total: Ember.computed('maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers', function() {
-    return ['maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers']
-      .reduce((total, identity) => {
-        let identityCount = get(this, identity) || 0;
-        return total + identityCount;
-      }, 0);
+  totalSpeakers: Ember.computed('maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers', function() {
+    return this.get('maleSpeakers') +
+      this.get('femaleSpeakers') +
+      this.get('nonBinarySpeakers');
   }),
 
-  noSpeakers: Ember.computed('maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers', function() {
-    return ['maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers']
-      .reduce((noSpeakers, identity) => {
-        let foundNone = get(this, identity) === 0;
-        return noSpeakers && foundNone;
-      }, true);
-  }),
-
-  isNotated: Ember.computed.bool('_speakers'),
+  _hasSpeakers: Ember.computed.or('maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers'),
+  hasSpeakers: Ember.computed.gt('_hasSpeakers', 0),
+  noSpeakers: Ember.computed.equal('_hasSpeakers', 0),
+  isNotated: Ember.computed.gte('_hasSpeakers', 0),
 
   hasMale: Ember.computed.gt('maleSpeakers', 0),
   hasFemale: Ember.computed.gt('femaleSpeakers', 0),
-  hasNonBinary: Ember.computed.gt('nonBinarySpeakers', 0),
-
-  _speakers: Ember.computed.or('maleSpeakers', 'femaleSpeakers', 'nonBinarySpeakers', 'noSpeakers')
-
+  hasNonBinary: Ember.computed.gt('nonBinarySpeakers', 0)
 });

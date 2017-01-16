@@ -10,7 +10,6 @@ Router.map(function() {
     this.route('index', { path: "/" });
     this.route("group", { path: "/:group_id" }, function() {
       this.route("events");
-      this.route("event", { path: "event/:event_id" });
     });
   });
 });

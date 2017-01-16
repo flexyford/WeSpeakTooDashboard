@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import layout from '../templates/components/d3-events';
 
 import { select } from 'd3-selection';
 
@@ -12,32 +11,47 @@ import { max } from 'd3-array';
 
 import { axisBottom, axisLeft,  } from 'd3-axis';
 
-const { run, get } = Ember;
+const { run, get, String: { camelize } } = Ember;
 
 export default Ember.Component.extend({
-  layout,
-
   tagName: 'svg',
   classNames: ['awesome-d3-widget'],
 
-  width: 720,
-  height: 500,
+
+  width: 900,
+  height: 300,
 
   attributeBindings: ['width', 'height'],
 
-  data: "State,Under 5 Years,5 to 13 Years,14 to 17 Years,18 to 24 Years,25 to 44 Years,45 to 64 Years,65 Years and Over\n\
-CA,2704659,4499890,2159981,3853788,10604510,8819342,4114496\n\
-TX,2027307,3277946,1420518,2454721,7017731,5656528,2472223\n\
-NY,1208495,2141490,1058031,1999120,5355235,5120254,2607672\n\
-FL,1140516,1938695,925060,1607297,4782119,4746856,3187797\n\
-IL,894368,1558919,725973,1311479,3596343,3239173,1575308\n\
-PA,737462,1345341,679201,1203944,3157759,3414001,1910571",
+  data: Ember.computed('events',
+                        'events.@each.maleSpeakers',
+                        'events.@each.femaleSpeakers',
+                        'events.@each.nonBinarySpeakers', function() {
+    // Recompute on male/female/non-binary speakers so d3 can redraw
+    let keys = get(this, 'keys');
+
+    return get(this, 'events')
+      .sortBy('time').map((event) => {
+        return keys.reduce((obj, key) => {
+          // Ex: obj['male'] = event.get( 'maleSpeakers' );
+          obj[key] = event.get( this.eventKey(key) );
+          return obj;
+        }, { eventDate: event.get('dateFormatted') });
+      });
+  }),
+
+  keys: ['male', 'female', 'non-binary'],
+
+
+  eventKey(key) {
+    return `${camelize(key)}Speakers`;
+  },
 
   didReceiveAttrs() {
-    // Schedule a call to our `drawCircles` method on Ember's "render" queue, which will
+    // Schedule a call to our `drawGraph` method on Ember's "render" queue, which will
     // happen after the component has been placed in the DOM, and subsequently
     // each time data is changed.
-    debugger;
+    Ember.$( "svg > g" ).remove();
     run.scheduleOnce('render', this, this.drawGraph);
   },
 
@@ -61,40 +75,38 @@ PA,737462,1345341,679201,1203944,3157759,3414001,1910571",
       .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
   }),
 
-  drawGraph() {
+  drawGraph: function() {
+    let data = get(this, 'data');
+    let keys = get(this, 'keys');
+
+    this.draw(data, keys);
+  },
+
+  draw(data, keys) {
     let svg = select('svg');
     let margin = {top: 20, right: 20, bottom: 30, left: 40};
     let width = get(this, 'width') - margin.left - margin.right;
     let height = get(this, 'height') - margin.top - margin.bottom;
 
     let g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    let data = csvParse(get(this, 'data'), function(d, i, columns) {
-      for (i = 1; i < columns.length; ++i) {
-
-        d[columns[i]] = +d[columns[i]];
-        console.log(`d[${columns[i]}] = `, d[columns[i]]);
-      }
-      return d;
-    });
-
-    let keys = data.columns.slice(1);
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     let x0 = get(this, 'x0');
     let x1 = get(this, 'x1');
     let y = get(this, 'y');
     let z = get(this, 'z');
 
-    x0.domain(data.map(function(d) { return d.State; }));
+    x0.domain(data.map(function(d) { return d.eventDate; }));
     x1.domain(keys).rangeRound([0, x0.bandwidth()]);
     y.domain([0, max(data, function(d) { return max(keys, function(key) { return d[key]; }); })]).nice();
+
+    let maxDomainValue = y.domain().slice(-1).pop();
 
     g.append("g")
       .selectAll("g")
       .data(data)
       .enter().append("g")
-      .attr("transform", function(d) { return "translate(" + x0(d.State) + ",0)"; })
+      .attr("transform", function(d) { return "translate(" + x0(d.eventDate) + ",0)"; })
       .selectAll("rect")
       .data(function(d) { return keys.map(function(key) { return {key: key, value: d[key]}; }); })
       .enter().append("rect")
@@ -111,7 +123,7 @@ PA,737462,1345341,679201,1203944,3157759,3414001,1910571",
 
     g.append("g")
       .attr("class", "axis")
-      .call(axisLeft(y).ticks(null, "s"))
+      .call(axisLeft(y).ticks(maxDomainValue, "d"))
       .append("text")
       .attr("x", 2)
       .attr("y", y(y.ticks().pop()) + 0.5)
@@ -119,14 +131,14 @@ PA,737462,1345341,679201,1203944,3157759,3414001,1910571",
       .attr("fill", "#000")
       .attr("font-weight", "bold")
       .attr("text-anchor", "start")
-      .text("Population");
+      .text("Speakers");
 
     var legend = g.append("g")
       .attr("font-family", "sans-serif")
       .attr("font-size", 10)
       .attr("text-anchor", "end")
       .selectAll("g")
-      .data(keys.slice().reverse())
+      .data(keys)
       .enter().append("g")
       .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
