@@ -74,6 +74,12 @@
     }
   }
 
+  &-link {
+    color: gray;
+    font-size:16px;
+    border-style: none;
+  }
+
   &.counter {
     color: $white;
     background-color: $electric-violet;
